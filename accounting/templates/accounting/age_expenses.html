@@ -1,0 +1,16 @@
+{% extends "accounting/base.html" %}
+{% block content %}
+    <h2>代ごとの支出</h2>
+    
+    {% for age, data in age_data.items %}
+        <div class="age-group">
+            <h3>{{ age }}代 - 合計: {{ data.total }}円</h3>
+            <ul>
+                {% for expense in data.details %}
+                {% load humanize %}
+                    <li>{{ expense.name }}: {{ expense.amount}}円（{{ expense.date }}）</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endfor %}
+{% endblock %}

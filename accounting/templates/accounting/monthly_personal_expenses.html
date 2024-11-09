@@ -1,0 +1,24 @@
+{% extends "accounting/base.html" %}
+{% block content %}
+    <h2>月ごとの個人支出</h2>
+    
+    {% for name, monthly_expenses in personal_data.items %}
+        <div class="person">
+            <h3>{{ name }}</h3>
+            <table>
+                <tr>
+                    <th>月</th>
+                    <th>合計</th>
+                </tr>
+                {% for expense in monthly_expenses %}
+                    <tr>
+                        <td>{{ expense.month|date:"Y年m月" }}</td>
+                        {% load humanize %}
+                        <td>{{ expense.total}}円</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    {% endfor %}
+{% endblock %}
+

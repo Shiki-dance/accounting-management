@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>会計管理システム</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'accounting/css/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>会計管理システム</h1>
+        </header>
+
+        <section class="content">
+            {% block content %}{% endblock %}
+        </section>
+    </div>
+</body>
+</html>

@@ -1,0 +1,73 @@
+/* 全体のレイアウト */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* ヘッダー */
+header h1 {
+    font-size: 24px;
+    color: #5a5a5a;
+    border-bottom: 2px solid #d3d3d3;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+/* 各セクションのスタイル */
+.department, .age-group, .person {
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #f0f4f8;
+    border-radius: 5px;
+}
+
+/* 見出し */
+h2, h3 {
+    color: #4a90e2;
+}
+
+/* リストのスタイル */
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    padding: 5px 0;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+/* テーブルのスタイル */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+table th, table td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+table th {
+    background-color: #e3e3e3;
+    color: #4a4a4a;
+}
+
+/* 金額部分 */
+li, td {
+    font-weight: bold;
+    color: #333;
+}
