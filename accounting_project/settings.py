@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-u8037j5o(b$pzdjpu4(^^9fp!o1s8tg!z%m0+-76qd4fwvcxf0
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['.herokuapp.com', 'stark-hollows-76911-95a662502275.herokuapp.com']
+ALLOWED_HOSTS = ['.herokuapp.com', 'stark-hollows-76911-95a662502275.herokuapp.com', 'localhost', '127.0.0.1']
 TIME_ZONE = 'Asia/Tokyo'
 USE_TZ = True
 
