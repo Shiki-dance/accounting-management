@@ -17,8 +17,16 @@ Including another URLconf
 # accounting_project/urls.py
 from django.contrib import admin
 from django.urls import include, path
+from . import views 
+# accounting_project/views.py
+
+from django.shortcuts import render
+
+def index(request):
+    return render(request, 'index.html')  # 'index.html'を返す
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounting/', include('accounting.urls')),  # accounting.urls をインクルード
+    path('', views.index, name='home'),  # 追加: ルートURLを処理するビュー
 ]
