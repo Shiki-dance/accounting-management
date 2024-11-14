@@ -1,12 +1,13 @@
 from django.urls import path
 from . import views
+from django.shortcuts import render
 
 # accounting/views.py
 
 from django.http import HttpResponse
 
 def index(request):
-    return HttpResponse("Welcome to the Accounting App!")
+    return render(request, 'index.html')
 
 urlpatterns = [
     path('', views.index, name='index'),  # ルートURLに対するビュー
