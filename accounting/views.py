@@ -56,6 +56,9 @@ def monthly_personal_expenses(request):
 
     return render(request, 'accounting/monthly_personal_expenses.html', {'personal_data': personal_data})
 
+def index(request):
+    return HttpResponse("Welcome to the Accounting App!")
+
 def export_department_expenses_pdf(request):
     # HTTPレスポンスをPDF形式で作成
     response = HttpResponse(content_type='application/pdf')
