@@ -17,7 +17,7 @@ Including another URLconf
 # accounting_project/urls.py
 from django.contrib import admin
 from django.urls import include, path
-from . import views 
+from accounting import views 
 # accounting_project/views.py
 
 from django.shortcuts import render
