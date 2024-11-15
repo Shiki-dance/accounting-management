@@ -6,9 +6,6 @@ from django.shortcuts import render
 
 from django.http import HttpResponse
 
-def index(request):
-    return render(request, 'index.html')
-
 urlpatterns = [
     path('', views.index, name='index'),  # ルートURLに対するビュー
     path('department-expenses/', views.department_expenses, name='department_expenses'),
