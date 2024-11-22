@@ -8,7 +8,7 @@ from django.http import HttpResponse
 
 urlpatterns = [
     path('', views.index, name='index'),  # ルートURLに対するビュー
-    path('create-expenses/', views.create_expense, name='create_expense'),
+    path('create-expenses/', views.create_expenses, name='create_expenses'),
     path('department-expenses/', views.department_expenses, name='department_expenses'),
     path('age-expenses/', views.age_expenses, name='age_expenses'),
     path('monthly-personal-expenses/', views.monthly_personal_expenses, name='monthly_personal_expenses'),

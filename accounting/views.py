@@ -26,7 +26,7 @@ def department_expenses(request):
 
 # 2. フォーム入力ビュー
 
-def create_expense(request):
+def create_expenses(request):
     if request.method == 'POST':
         form = ExpenseForm(request.POST)
         if form.is_valid():
@@ -35,7 +35,7 @@ def create_expense(request):
     else:
         form = ExpenseForm()  # GETリクエスト時は空のフォームを表示
 
-    return render(request, 'accounting/create_expense.html', {'form': form})
+    return render(request, 'accounting/create_expenses.html', {'form': form})
    
 # 4. 各代ごとの支出合計と内訳上と同様に行う
 def age_expenses(request):
