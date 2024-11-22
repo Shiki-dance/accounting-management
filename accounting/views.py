@@ -4,6 +4,8 @@ from django.db.models import Sum
 from django.db.models.functions import TruncMonth
 from django.http import HttpResponse
 # views.py
+from django.shortcuts import render, redirect  # ここでredirectをインポート
+from .forms import ExpenseForm  # ExpenseFormをインポート
 from reportlab.pdfgen import canvas  # 追加
 
 
@@ -22,6 +24,19 @@ def department_expenses(request):
         }
     return render(request, 'accounting/department_expenses.html', {'department_data': department_data})
 
+# 2. フォーム入力ビュー
+
+def create_expense(request):
+    if request.method == 'POST':
+        form = ExpenseForm(request.POST)
+        if form.is_valid():
+            form.save()  # フォームデータを保存
+            return redirect('expense_list')  # データ保存後、支出リストページにリダイレクト
+    else:
+        form = ExpenseForm()  # GETリクエスト時は空のフォームを表示
+
+    return render(request, 'accounting/create_expenses.html', {'form': form})
+   
 # 4. 各代ごとの支出合計と内訳上と同様に行う
 def age_expenses(request):
     ages = Expense.objects.values('age').distinct()
