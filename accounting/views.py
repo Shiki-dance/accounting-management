@@ -58,7 +58,7 @@ def monthly_personal_expenses(request):
 
 def index(request):
     
-    return render(request, 'index.html') 
+    return render(request, 'accounting/index.html') 
 
 def export_department_expenses_pdf(request):
     # HTTPレスポンスをPDF形式で作成
