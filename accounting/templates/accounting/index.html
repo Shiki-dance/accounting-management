@@ -3,14 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to Accounting</title>
+    <title>会計管理システム</title>
 </head>
 <body>
-    <h1>Welcome to the Accounting App!</h1>
-    <li><a href="{% url 'create_expenses' %}">入力フォーム</a></li>
-    <li><a href="{% url 'department_expenses' %}">部門別支出</a></li>
-    <li><a href="{% url 'age_expenses' %}">年齢別支出</a></li>
-    <li><a href="{% url 'monthly_personal_expenses' %}">月別個人支出</a></li>
-    
+    <header>
+        <h1>会計管理システム</h1>
+        <nav>
+            <ul>
+                <li><a href ="/">ホーム</a><li>
+                <li><a href="{% url 'create_expenses' %}">入力フォーム</a></li>
+                <li><a href="{% url 'department_expenses' %}">部門別支出</a></li>
+                <li><a href="{% url 'age_expenses' %}">年齢別支出</a></li>
+                <li><a href="{% url 'monthly_personal_expenses' %}">月別個人支出</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section>
+        <h2>ようこそ、会計管理システムへ</h2>
+        <p>このシステムでは、あなたの支出を簡単に管理し、レポートを生成することができます。支出を入力し、部門別や年齢別のデータを確認しましょう。</p>
+    </section>
+
+    <footer>
+        <p>© 2024 会計管理システム</p>
+    </footer>
 </body>
 </html>

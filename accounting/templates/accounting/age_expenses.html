@@ -2,6 +2,8 @@
 {% block content %}
     <h2>代ごとの支出</h2>
     
+    <p>ここでは、代ごとの支出を確認できます。代ごとの支出合計や詳細情報を一覧で表示します。</p>
+
     {% for age, data in age_data.items %}
         <div class="age-group">
             <h3>{{ age }}代 - 合計: {{ data.total }}円</h3>

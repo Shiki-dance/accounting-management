@@ -7,5 +7,16 @@
     {{ form.as_p }}
     <button type="submit">保存</button>
 </form>
+
+<p>ここで入力した支出データは、後から部門別、年齢別、月別で分析することができます。</p>
+
+<!-- JavaScript for date picker -->
+<script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function() {
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('id_date').value = today;
+    });
+</script>
+
 {% endblock %}
 
