@@ -37,6 +37,16 @@ def create_expenses(request):
 
     return render(request, 'accounting/create_expenses.html', {'form': form})
    
+from django.shortcuts import render
+from .models import Expense  # Expenseモデルをインポート
+
+# 3 支出リストを表示するための処理
+def expense_list(request):
+    # Expenseモデルから全ての支出データを取得
+    expenses = Expense.objects.all()
+    return render(request, 'accounting/expense_list.html', {'expenses': expenses})
+
+
 # 4. 各代ごとの支出合計と内訳上と同様に行う
 def age_expenses(request):
     ages = Expense.objects.values('age').distinct()
