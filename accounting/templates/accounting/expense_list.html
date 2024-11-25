@@ -9,8 +9,19 @@
     <h1>支出リスト</h1>
     <ul>
         {% for expense in expenses %}
-            <li>{{ expense.name }} - {{ expense.amount }}円 - {{ expense.date }}</li>
+            <li>
+                {{ expense.name }} - {{ expense.amount }}円 - {{ expense.department }} - {{ expense.date }}
+                <!-- 削除ボタン -->
+                <form action="{% url 'delete_expense' expense.id %}" method="post" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" onclick="return confirm('本当に削除しますか？')">削除</button>
+                </form>
+            </li>
         {% endfor %}
     </ul>
+    <!-- ホームに戻るリンク -->
+    <a href="{% url 'index' %}">ホームに戻る</a>
+
 </body>
 </html>
+

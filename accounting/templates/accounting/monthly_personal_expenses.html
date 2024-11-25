@@ -1,7 +1,8 @@
 {% extends "accounting/base.html" %}
 {% block content %}
     <h2>月ごとの個人支出</h2>
-    
+    <p>ここでは、月ごとの支出を確認できます。月ごとの支出合計や詳細情報を一覧で表示します。</p>
+
     {% for name, monthly_expenses in personal_data.items %}
         <div class="person">
             <h3>{{ name }}</h3>

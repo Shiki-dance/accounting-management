@@ -4,10 +4,13 @@ from django.db.models import Sum
 from django.db.models.functions import TruncMonth
 from django.http import HttpResponse
 # views.py
-from django.shortcuts import render, redirect  # ここでredirectをインポート
+from django.shortcuts import render, redirect, get_object_or_404 # ここでredirectをインポート
 from .forms import ExpenseForm  # ExpenseFormをインポート
 from reportlab.pdfgen import canvas  # 追加
+from django.contrib import messages
+import logging
 
+logger = logging.getLogger(__name__)
 
 # 1. 係りごとの支出合計と内訳
 def department_expenses(request):
@@ -45,6 +48,26 @@ def expense_list(request):
     # Expenseモデルから全ての支出データを取得
     expenses = Expense.objects.all()
     return render(request, 'accounting/expense_list.html', {'expenses': expenses})
+
+# 3.1 データ削除
+
+def delete_expense(request, expense_id):
+    expense = get_object_or_404(Expense, id=expense_id)
+
+    if request.method == "POST":
+
+        #ログ記録
+        logger.info(f"User{request.user.username} deleted expense with ID {expense.id}, Name: {expense.name}, Amount: {expense.amount}, Department{expense.department}")
+        # 削除処理
+        expense.delete()
+
+        # 削除完了メッセージ
+        messages.success(request, '支出データが削除されました。')
+
+        # 削除後、支出リストページにリダイレクト
+        return redirect('expense_list')
+    
+    return redirect('expense_list')  # POST以外の場合もリダイレクト
 
 
 # 4. 各代ごとの支出合計と内訳上と同様に行う
