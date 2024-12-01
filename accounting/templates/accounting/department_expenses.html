@@ -11,7 +11,12 @@
         <h3>{{ department }} - 合計: {{ data.total}}円</h3>
         <ul>
             {% for expense in data.details %}
-                <li>{{ expense.name }}: {{ expense.amount }}円（{{ expense.date }}）</li>
+                <li>{{ expense.name }}: {{ expense.amount }}円（{{ expense.date }} ）</li>
+                    {% if expense.department == '渉外' %}
+                        使った施設: {{ expense.institution }} <!-- 施設表示 -->
+                    {% else %}
+                        使った内容: {{ expense.content }} <!-- 内容表示 -->
+                    {% endif %}
             {% endfor %}
         </ul>
     </div>

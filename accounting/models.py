@@ -24,3 +24,22 @@ class Expense(models.Model):#すべてのもとになるclass
 
     def __str__(self):
         return f"{self.name} - {self.department} - {self.amount}円"
+
+from django.db import models
+
+# 新しいフォームに対して使用するモデル
+class ExpenseCategory(models.Model):
+    CATEGORY_CHOICES = (
+        ('公演費', '公演費'),
+        ('月会費', '月会費'),
+        ('ダンパ費', 'ダンパ費'),
+    )
+    
+    age = models.IntegerField()
+    name = models.CharField(max_length=100)
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    category_name = models.CharField(max_length=10, choices=CATEGORY_CHOICES)
+    date = models.DateField()
+
+    def __str__(self):
+        return self.category_name

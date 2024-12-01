@@ -1,0 +1,58 @@
+{% extends "accounting/base.html" %}
+
+{% block content %}
+    <h2>{{ year }}年{{ month }}月の支出</h2>
+    
+    <!-- 並べ替えのリンク -->
+    <div>
+        <a href="#" onclick="sortTable('name')">名前順</a> |
+        <a href="#" onclick="sortTable('department')">係り順</a>
+    </div>
+
+    <table id="expensesTable">
+        <thead>
+            <tr>
+                <th>名前</th>
+                <th>金額</th>
+                <th>係り</th>
+                <th>使った内容</th>
+                <th>日付</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for expense in expenses %}
+                <tr>
+                    <td>{{ expense.name }}</td>
+                    <td>{{ expense.amount }}円</td>
+                    <td>{{ expense.department }}</td>
+                    <td>{{ expense.content }}</td>
+                    <td>{{ expense.date|date:"Y年m月d日" }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <p>合計: {{ total }}円</p>
+
+    <script>
+        function sortTable(by) {
+            const table = document.getElementById('expensesTable');
+            const rows = Array.from(table.rows).slice(1); // ヘッダー行を除く
+            let sortedRows;
+
+            if (by === 'name') {
+                sortedRows = rows.sort((a, b) => {
+                    return a.cells[0].innerText.localeCompare(b.cells[0].innerText);
+                });
+ 
+            } else if (by === 'department') {
+                sortedRows = rows.sort((a, b) => {
+                    return a.cells[2].innerText.localeCompare(b.cells[2].innerText);
+                });
+            }
+
+            // 並べ替えた行をテーブルに追加
+            sortedRows.forEach(row => table.appendChild(row));
+        }
+    </script>
+{% endblock %}

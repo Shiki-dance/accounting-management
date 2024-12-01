@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from .models import Expense
+from .forms import ExpenseCategoryForm
+from .models import ExpenseCategory
 from django.db.models import Sum
 from django.db.models.functions import TruncMonth
 from django.http import HttpResponse
@@ -9,6 +11,8 @@ from .forms import ExpenseForm  # ExpenseFormをインポート
 from reportlab.pdfgen import canvas  # 追加
 from django.contrib import messages
 import logging
+from itertools import groupby
+
 
 logger = logging.getLogger(__name__)
 
@@ -95,8 +99,8 @@ def monthly_personal_expenses(request):
         monthly_expenses = ( # 月ごとの支出の合計を表示
             Expense.objects
             .filter(name=name)
-            .annotate(month=TruncMonth('date'))
-            .values('month')
+            .annotate(month=TruncMonth('date')) #月ごとに集計
+            .values('month') #'date'を追加して保持
             .annotate(total=Sum('amount') or 0)
             .order_by('month')
         )
@@ -148,3 +152,45 @@ def export_department_expenses_pdf(request):
     # PDFを完成させる
     pdf_canvas.save()
     return response
+
+def month_details(request, year, month):
+    year = int(year)  # yearを整数に変換
+    month = int(month)  # monthを整数に変換
+    expenses = Expense.objects.filter(date__year=year, date__month=month)
+    total = expenses.aggregate(Sum('amount'))['amount__sum'] or 0
+    return render(request, 'accounting/month_details.html', {
+        'expenses': expenses, 
+        'year': year, 
+        'month': month, 
+        'total': total
+    })
+
+def input_category(request):
+    if request.method == 'POST':
+        form = ExpenseCategoryForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('input_category')  # 成功後リダイレクト
+    else:
+        form = ExpenseCategoryForm()
+    return render(request, 'accounting/input_category.html', {'form': form})
+
+
+
+def view_public_performance(request):
+    performance_expenses = ExpenseCategory.objects.filter(category_name='公演費').order_by('age', 'name')
+    grouped_performance_expenses = groupby(performance_expenses, key=lambda x: x.age)
+    grouped_performance_expenses = [(age, list(expenses)) for age, expenses in grouped_performance_expenses]
+    return render(request, 'accounting/view_public_performance.html', {'grouped_performance_expenses': grouped_performance_expenses})
+
+def view_monthly_fee(request):
+    monthly_fee_expenses = ExpenseCategory.objects.filter(category_name='月会費').order_by('age', 'name')
+    grouped_monthly_fee_expenses = groupby(monthly_fee_expenses, key=lambda x: x.age)
+    grouped_monthly_fee_expenses = [(age, list(expenses)) for age, expenses in grouped_monthly_fee_expenses]
+    return render(request, 'accounting/view_monthly_fee.html', {'grouped_monthly_fee_expenses': grouped_monthly_fee_expenses})
+
+def view_dance_party(request):
+    dance_party_expenses = ExpenseCategory.objects.filter(category_name='ダンパ費').order_by('age', 'name')
+    grouped_dance_party_expenses = groupby(dance_party_expenses, key=lambda x: x.age)
+    grouped_dance_party_expenses = [(age, list(expenses)) for age, expenses in grouped_dance_party_expenses]
+    return render(request, 'accounting/view_dance_party.html', {'grouped_dance_party_expenses': grouped_dance_party_expenses})
