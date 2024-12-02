@@ -76,6 +76,9 @@ TEMPLATES = [
     },
 ]
 
+LOGIN_REDIRECT_URL = '/home'  # ここにログイン後のリダイレクト先を指定
+
+
 WSGI_APPLICATION = 'accounting_project.wsgi.application'
 
 
