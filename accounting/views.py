@@ -16,6 +16,30 @@ from itertools import groupby
 
 logger = logging.getLogger(__name__)
 
+# ログイン設定
+from django.contrib.auth import authenticate, login
+
+
+def login_view(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('home')  # ホームページにリダイレクト
+        else:
+            return render(request, 'login.html', {'error': 'Invalid credentials'})
+    return render(request, 'accounting/login.html')
+
+from django.contrib.auth.decorators import login_required
+
+@login_required
+def home(request):
+    # ホームページの処理
+    return render(request, 'home.html')
+
+
 # 1. 係りごとの支出合計と内訳
 def department_expenses(request):
     departments = Expense.objects.values('department').distinct()
