@@ -100,17 +100,19 @@ def delete_expense(request, expense_id):
 
 # 4. 各代ごとの支出合計と内訳上と同様に行う
 def age_expenses(request):
+    sort_by = request.GET.get('sort_by', 'name')  # URLパラメータで並べ替え基準を取得（デフォルトは'name'）
     ages = Expense.objects.values('age').distinct()
     age_data = {}
+
     for age_entry in ages:
         age = age_entry['age']
-        expenses = Expense.objects.filter(age=age)
+        expenses = Expense.objects.filter(age=age).order_by(sort_by)  # 並べ替え
         total = expenses.aggregate(Sum('amount'))['amount__sum'] or 0
         age_data[age] = {
             'total': total,
             'details': expenses,
         }
-    
+
     return render(request, 'accounting/age_expenses.html', {'age_data': age_data})
 
 # 5. 一人ひとりの月ごとの支出合計

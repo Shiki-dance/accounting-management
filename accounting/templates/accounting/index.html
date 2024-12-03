@@ -4,29 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>会計管理システム</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'accounting/css/style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
-        <h1>会計管理システム</h1>
-        <nav>
+        <div class="header-container">
+            <h1>会計管理システム</h1>
+        </div>
+        <nav class="main-nav">
             <ul>
-                <li><a href ="/">ホーム</a><li>
-                <li><a href="{% url 'create_expenses' %}">入力フォーム</a></li>
-                <li><a href="{% url 'input_category' %}">通常期入力フォーム</a></li>
-                <li><a href="{% url 'department_expenses' %}">係り別支出</a></li>
-                <li><a href="{% url 'age_expenses' %}">代別支出</a></li>
-                <li><a href="{% url 'monthly_personal_expenses' %}">月別個人支出</a></li>
-                <li><a href="{% url 'view_public_performance' %}">公演費まとめ</a></li>
-                <li><a href="{% url 'view_monthly_fee' %}">月会費まとめ</a></li>
-                <li><a href="{% url 'view_dance_party' %}">ダンパ費まとめ</a></li>
+                <li class="active"><a href="/">🏠 ホーム</a></li>
+                <li><a href="{% url 'create_expenses' %}">✏️ 係り活動入力フォーム</a></li>
+                <li><a href="{% url 'input_category' %}">📅 通常期入力フォーム</a></li>
+                <li><a href="{% url 'department_expenses' %}">💼 係り別支出</a></li>
+                <li><a href="{% url 'age_expenses' %}">📊 代別支出</a></li>
+                <li><a href="{% url 'monthly_personal_expenses' %}">👤 月別個人支出</a></li>
+                <li><a href="{% url 'view_public_performance' %}">🎭 公演費まとめ</a></li>
+                <li><a href="{% url 'view_monthly_fee' %}">💰 月会費まとめ</a></li>
+                <li><a href="{% url 'view_dance_party' %}">🎉 ダンパ費まとめ</a></li>
             </ul>
         </nav>
     </header>
-    <section>
-        <h2>ようこそ、会計管理システムへ</h2>
-        <p>このページではDLCのみんなが払ったお金を、入力し管理できるようにしたよ!!</p>
-    </section>
-
+    <main>
+        <section class="intro">
+            <h2>ようこそ、会計管理システムへ</h2>
+            <p>このページでは、DLCのみんなが支払ったお金を入力し、管理することができます！</p>
+        </section>
+    </main>
     <footer>
         <p>© 2024 DLC会計管理システム</p>
     </footer>

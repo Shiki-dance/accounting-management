@@ -1,73 +1,89 @@
-/* 全体のレイアウト */
+/* 全体設定 */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f7f7f7;
-    color: #333;
+    font-family: 'Roboto', Arial, sans-serif;
+    background: linear-gradient(135deg, #1e90ff, #ff7f50);
+    color: #fff;
     margin: 0;
     padding: 0;
 }
 
-.container {
-    width: 80%;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+header {
+    text-align: center;
+    padding: 20px 10px;
+    background-color: rgba(0, 0, 0, 0.7);
 }
 
-/* ヘッダー */
 header h1 {
-    font-size: 24px;
-    color: #5a5a5a;
-    border-bottom: 2px solid #d3d3d3;
-    padding-bottom: 10px;
-    margin-bottom: 20px;
+    font-size: 2.5rem;
+    color: #fff;
+    margin: 0;
 }
 
-/* 各セクションのスタイル */
-.department, .age-group, .person {
-    margin-bottom: 20px;
-    padding: 10px;
-    background-color: #f0f4f8;
-    border-radius: 5px;
-}
-
-/* 見出し */
-h2, h3 {
-    color: #4a90e2;
-}
-
-/* リストのスタイル */
-ul {
+.main-nav ul {
     list-style: none;
+    margin: 0;
     padding: 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
-li {
-    padding: 5px 0;
-    border-bottom: 1px solid #e0e0e0;
+.main-nav li {
+    margin: 10px;
 }
 
-/* テーブルのスタイル */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
+.main-nav a {
+    display: block;
+    padding: 15px 20px;
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    text-align: center;
+    transition: all 0.3s ease;
 }
 
-table th, table td {
-    padding: 8px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
+.main-nav a:hover {
+    background: rgba(255, 255, 255, 0.4);
+    transform: scale(1.05);
 }
 
-table th {
-    background-color: #e3e3e3;
-    color: #4a4a4a;
-}
-
-/* 金額部分 */
-li, td {
+.main-nav .active a {
+    background: #ff7f50;
     font-weight: bold;
-    color: #333;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.intro {
+    text-align: center;
+    padding: 50px 20px;
+}
+
+.intro h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.intro p {
+    font-size: 1.2rem;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.7);
+    color: #fff;
+}
+
+/* モバイル対応 */
+@media (max-width: 768px) {
+    .main-nav ul {
+        flex-direction: column;
+    }
+
+    .main-nav a {
+        width: 100%;
+        text-align: left;
+    }
 }
