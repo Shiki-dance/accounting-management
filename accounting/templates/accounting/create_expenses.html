@@ -1,32 +1,40 @@
 {% extends "accounting/base.html" %}
-
 {% block content %}
-<h2>支出データの作成</h2>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">保存</button>
-</form>
-
-<p>
-    ここで入力した支出データは、後から部門別、年齢別、月別で分析することができます<br>
-    代:各代を入力して！<br>
-    ダンサーネーム:統一して<br>
-    金額:使った金額を入力してね<br>
-    係り:自分の係りを入力してね、もしない場合はその他<br>
-    借りた施設:渉外の子だけ入力して！<br>
-    使った内容:ex交際費とか、レンタカー代とかいろいろ  空欄でもOK<br>
-    日付:おんなじ形式で入力してね<br>
-    んで最後に保存<br>
-</p>
-
-<!-- JavaScript for date picker -->
-<script type="text/javascript">
-    document.addEventListener('DOMContentLoaded', function() {
-        const today = new Date().toISOString().split('T')[0];
-        document.getElementById('id_date').value = today;
-    });
-</script>
-
+    <div class="form-container">
+        <h2>係り活動入力フォーム</h2>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="age">代</label>
+                <input type="number" id="age" name="age" placeholder="例: 22" required>
+            </div>
+            <div class="form-group">
+                <label for="name">名前</label>
+                <input type="text" id="name" name="name" placeholder="例: 山田太郎" required>
+            </div>
+            <div class="form-group">
+                <label for="amount">金額</label>
+                <input type="number" step="0.01" id="amount" name="amount" placeholder="例: 1500" required>
+            </div>
+            <div class="form-group">
+                <label for="department">係り</label>
+                <select id="department" name="department">
+                    {% for department in departments %}
+                        <option value="{{ department }}">{{ department }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="date">日付</label>
+                <input type="date" id="date" name="date" required>
+            </div>
+            <div class="form-group">
+                <label for="content">使った内容</label>
+                <textarea id="content" name="content" placeholder="例: 買い出しで使用"></textarea>
+            </div>
+            <button type="submit" class="submit-btn">保存する</button>
+        </form>
+    </div>
 {% endblock %}
+
 

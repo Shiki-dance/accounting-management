@@ -2,33 +2,44 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>会計管理システム</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}会計管理システム{% endblock %}</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'accounting/css/style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <header>
+    <header>
+        <div class="header-container">
             <h1>会計管理システム</h1>
-            <nav>
-                <ul>
-                    <li><a href="/">ホーム</a></li>
-                    <li><a href="{% url 'create_expenses' %}">係り活動入力フォーム</a></li>
-                    <li><a href="{% url 'input_category' %}">通常期入力フォーム</a></li>
-                    <li><a href="{% url 'department_expenses' %}">係り別支出</a></li>
-                    <li><a href="{% url 'age_expenses' %}">代別支出</a></li>
-                    <li><a href="{% url 'monthly_personal_expenses' %}">月別個人支出</a></li>
-                    <li><a href="{% url 'view_public_performance' %}">公演費まとめ</a></li>
-                    <li><a href="{% url 'view_monthly_fee' %}">月会費まとめ</a></li>
-                    <li><a href="{% url 'view_dance_party' %}">ダンパ費まとめ</a></li>
-                </ul>
-            </nav>
-        
-        </header>
-
-        <section class="content">
-            {% block content %}{% endblock %}
-        </section>
-    </div>
+            <button class="menu-toggle" id="menuToggle">☰</button>
+        </div>
+        <nav class="main-nav" id="mainNav">
+            <ul>
+                <li><a href="/">🏠 ホーム</a></li>
+                <li><a href="{% url 'create_expenses' %}">✏️ 係り活動入力フォーム</a></li>
+                <li><a href="{% url 'input_category' %}">📅 通常期入力フォーム</a></li>
+                <li><a href="{% url 'department_expenses' %}">💼 係り別支出</a></li>
+                <li><a href="{% url 'age_expenses' %}">📊 代別支出</a></li>
+                <li><a href="{% url 'monthly_personal_expenses' %}">👤 月別個人支出</a></li>
+                <li><a href="{% url 'view_public_performance' %}">🎭 公演費まとめ</a></li>
+                <li><a href="{% url 'view_monthly_fee' %}">💰 月会費まとめ</a></li>
+                <li><a href="{% url 'view_dance_party' %}">🎉 ダンパ費まとめ</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    <footer>
+        <p>© 2024 DLC会計管理システム</p>
+    </footer>
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const mainNav = document.getElementById('mainNav');
+        menuToggle.addEventListener('click', () => {
+            mainNav.classList.toggle('open');
+        });
+    </script>
 </body>
 </html>
