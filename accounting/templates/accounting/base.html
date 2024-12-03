@@ -12,9 +12,13 @@
     <header>
         <div class="header-container">
             <h1>会計管理システム</h1>
+            {% if request.path != "/" %}
             <button class="menu-toggle" id="menuToggle">☰</button>
+            {% endif %}
         </div>
-        <nav class="main-nav" id="mainNav">
+
+        <!-- ナビゲーション -->
+        <nav class="main-nav {% if request.path != '/' %}hidden{% endif %}" id="mainNav">
             <ul>
                 <li><a href="/">🏠 ホーム</a></li>
                 <li><a href="{% url 'create_expenses' %}">✏️ 係り活動入力フォーム</a></li>
@@ -28,18 +32,25 @@
             </ul>
         </nav>
     </header>
+
+    <!-- メインコンテンツ -->
     <main>
         {% block content %}{% endblock %}
     </main>
+
+    <!-- フッター -->
     <footer>
         <p>© 2024 DLC会計管理システム</p>
     </footer>
+
     <script>
         const menuToggle = document.getElementById('menuToggle');
         const mainNav = document.getElementById('mainNav');
-        menuToggle.addEventListener('click', () => {
-            mainNav.classList.toggle('open');
-        });
+        if (menuToggle) {
+            menuToggle.addEventListener('click', () => {
+                mainNav.classList.toggle('open');
+            });
+        }
     </script>
 </body>
 </html>
