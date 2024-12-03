@@ -64,33 +64,25 @@ header h1 {
 
 /* ハンバーガーメニュー */
 .menu-toggle {
-    font-size: 1.5rem;
-    background: none;
-    border: none;
-    color: #fff;
-    cursor: pointer;
     display: none;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 10px;
+    background-color: transparent;
+    border: none;
+    color: #333;
 }
 
 @media (max-width: 768px) {
     .menu-toggle {
         display: block;
     }
-
     .main-nav {
         display: none;
-        flex-direction: column;
-        align-items: flex-start;
     }
-
     .main-nav.open {
         display: flex;
-    }
-
-    .main-nav a {
-        width: 100%;
-        text-align: left;
-        padding-left: 20px;
+        flex-direction: column;
     }
 }
 
