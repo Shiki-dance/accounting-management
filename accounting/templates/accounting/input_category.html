@@ -1,19 +1,50 @@
 {% extends "accounting/base.html" %}
 
 {% block content %}
-<h2>通常期支出フォーム</h2>
+<div class="form-container">
+    <h2 class="form-title">通常期支出フォーム</h2>
+    <p class="form-description">以下の項目を入力してください。</p>
 
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">保存</button>
-</form>
+    <form method="post" class="styled-form">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="id_age" class="form-label">{{ form.age.label }}</label>
+            {{ form.age }}
+            <small class="form-hint">例: 23,22</small>
+        </div>
+        <div class="form-group">
+            <label for="id_name" class="form-label">{{ form.name.label }}</label>
+            {{ form.name }}
+            <small class="form-hint">例: しき</small>
+        </div>
+        <div class="form-group">
+            <label for="id_amount" class="form-label">{{ form.amount.label }}</label>
+            {{ form.amount }}
+            <small class="form-hint">例: 5000</small>
+        </div>
+        <div class="form-group">
+            <label for="id_category_name" class="form-label">{{ form.category_name.label }}</label>
+            {{ form.category_name }}
+            <small class="form-hint">公演費、月会費、ダンパ費のいずれかを選択してください。</small>
+        </div>
+        <div class="form-group">
+            <label for="id_date" class="form-label">{{ form.date.label }}</label>
+            {{ form.date }}
+            <small class="form-hint">日付を選択してください。</small>
+        </div>
+
+        <button type="submit" class="btn-submit">保存</button>
+    </form>
+</div>
 
 <script type="text/javascript">
     document.addEventListener('DOMContentLoaded', function() {
         const today = new Date().toISOString().split('T')[0];
-        document.getElementById('id_date').value = today;
+        const dateInput = document.getElementById('id_date');
+        if (dateInput) {
+            dateInput.value = today;
+        }
     });
 </script>
-
 {% endblock %}
+
