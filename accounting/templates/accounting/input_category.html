@@ -28,12 +28,11 @@
             <small class="form-hint">公演費、月会費、ダンパ費のいずれかを選択してください。</small>
         </div>
         <div class="form-group">
-            <label for="id_date" class="form-label">{{ form.date.label }}</label>
-            {{ form.date }}
-            <small class="form-hint">日付を選択してください。</small>
+            <label for="id_date">日付</label>
+            <input type="date" name="date" id="id_date" class="form-control" required>
         </div>
 
-        <button type="submit" class="btn-submit">保存</button>
+        <button type="submit" class="submit-btn">保存</button>
     </form>
 </div>
 

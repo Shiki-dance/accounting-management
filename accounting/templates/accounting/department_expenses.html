@@ -1,24 +1,35 @@
 {% extends "accounting/base.html" %}
 
 {% block content %}
-<h2>部門別支出</h2>
-<p>ここでは、各部門ごとの支出を確認できます。部門ごとの支出合計や詳細情報を一覧で表示します。</p>
+<div class="content-container">
+    <h2 class="page-title">係ごとの経費まとめ</h2>
+    <p class="page-description">ここでは、各係りごとの支出を確認できます。係りごとの支出合計や詳細情報を一覧で表示します。</p>
 
-<a href="{% url 'export_department_expenses_pdf' %}" class="btn btn-primary">PDFとしてエクスポート</a>
+    <!-- PDFエクスポートボタン -->
+    <div class="export-container">
+        <a href="{% url 'export_department_expenses_pdf' %}" class="btn-export">PDFとしてエクスポート</a>
+    </div>
 
-{% for department, data in department_data.items %}
-    <div class="department">
-        <h3>{{ department }} - 合計: {{ data.total}}円</h3>
-        <ul>
+    <!-- 係ごとの支出リスト -->
+    {% for department, data in department_data.items %}
+    <div class="department-section">
+        <h3 class="department-title">{{ department }} - 合計: {{ data.total }}円</h3>
+        <ul class="expense-list">
             {% for expense in data.details %}
-                <li>{{ expense.name }}: {{ expense.amount }}円（{{ expense.date }} ）</li>
-                    {% if expense.department == '渉外' %}
-                        使った施設: {{ expense.institution }} <!-- 施設表示 -->
-                    {% else %}
-                        使った内容: {{ expense.content }} <!-- 内容表示 -->
-                    {% endif %}
+            <li class="expense-item">
+                <span class="expense-name">{{ expense.name }}</span>
+                <span class="expense-amount">{{ expense.amount }}円</span>
+                {% if expense.department == '渉外' %}
+                    <span class="expense-detail">施設: {{ expense.institution }}</span>
+                {% else %}
+                    <span class="expense-detail">内容: {{ expense.content }}</span>
+                {% endif %}
+                <span class="expense-date">{{ expense.date }}</span>
+            </li>
             {% endfor %}
         </ul>
     </div>
-{% endfor %}
+    {% endfor %}
+</div>
+
 {% endblock %}

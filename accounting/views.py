@@ -12,6 +12,7 @@ from reportlab.pdfgen import canvas  # 追加
 from django.contrib import messages
 import logging
 from itertools import groupby
+from .models import Expense
 
 
 logger = logging.getLogger(__name__)
@@ -180,15 +181,27 @@ def export_department_expenses_pdf(request):
     return response
 
 def month_details(request, year, month):
-    year = int(year)  # yearを整数に変換
-    month = int(month)  # monthを整数に変換
-    expenses = Expense.objects.filter(date__year=year, date__month=month)
+    # 並べ替え基準を取得（デフォルトは 'name'）
+    sort_by = request.GET.get('sort_by', 'name')
+
+    # 並べ替え基準が有効でない場合のフォールバック
+    if sort_by not in ['name', 'department', 'date']:
+        sort_by = 'name'
+
+    # 指定された年と月の支出を取得し、並べ替え
+    expenses = Expense.objects.filter(
+        date__year=year, date__month=month
+    ).order_by(sort_by)
+
+    # 合計金額を計算
     total = expenses.aggregate(Sum('amount'))['amount__sum'] or 0
+
+    # テンプレートにデータを渡す
     return render(request, 'accounting/month_details.html', {
-        'expenses': expenses, 
-        'year': year, 
-        'month': month, 
-        'total': total
+        'year': year,
+        'month': month,
+        'expenses': expenses,
+        'total': total,
     })
 
 def input_category(request):

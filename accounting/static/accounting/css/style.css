@@ -1,7 +1,9 @@
 /* 全体設定 */
 body {
     font-family: 'Roboto', Arial, sans-serif;
+    /*背景にグラデーションを採用*/
     background: linear-gradient(135deg, #1e90ff, #ff7f50);
+    /*文字色を白に指定*/
     color: #fff;
     margin: 0;
     padding: 0;
@@ -9,8 +11,10 @@ body {
 
 /* ヘッダー */
 header {
+    /*ヘッダーを中央ぞろえにする*/
     text-align: center;
     padding: 20px 10px;
+    /*半透明の背景を選択*/
     background-color: rgba(0, 0, 0, 0.7);
 }
 
@@ -65,7 +69,7 @@ header h1 {
 /* ハンバーガーメニュー */
 .menu-toggle {
     display: none;
-    background-color: #4a90e2;
+    background-color: #7ea5d1;
     color: white;
     border: none;
     padding: 10px;
@@ -167,14 +171,6 @@ footer {
 }
 
 /* フォーム全体のデザイン */
-.form-container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
 
 .form-title {
     font-size: 24px;
@@ -186,11 +182,6 @@ footer {
     font-size: 14px;
     color: #666;
     margin-bottom: 20px;
-}
-
-/* 各入力フィールドのデザイン */
-.form-group {
-    margin-bottom: 15px;
 }
 
 .form-label {
@@ -218,46 +209,8 @@ footer {
     border-color: #007bff;
 }
 
-/* ボタンのデザイン */
-.btn-submit {
-    background-color: #007bff;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    width: 100%;
-    text-align: center;
-}
 
-.btn-submit:hover {
-    background-color: #0056b3;
-}
 
-/* 全体のスタイル */
-.content-container {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-.page-title {
-    font-size: 24px;
-    text-align: center;
-    color: #333;
-    margin-bottom: 10px;
-}
-
-.page-description {
-    text-align: center;
-    color: #666;
-    margin-bottom: 20px;
-}
 
 /* 並べ替えフォーム */
 .sort-form {
@@ -292,35 +245,111 @@ footer {
     background-color: #357abd;
 }
 
-/* 代ごとのセクション */
-.age-sections {
+/* 代、係りごとのセクション */
+
+.age-section , .department-section{
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.age-title , .department-title{
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+    text-align: left;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 5px;
+}
+
+
+
+.page-description {
+    font-size: 16px;
+    margin-bottom: 20px;
+    color: #555;
+}
+
+.page-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.page-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.total-amount {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 20px;
+    color: #000;
+}
+
+/*月別個人支出のcss*/
+.person-sections {
     margin-top: 20px;
 }
 
-.age-section {
+.person-section {
     margin-bottom: 30px;
-    background-color: #fff;
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
 }
 
-.age-title {
+.person-title {
     font-size: 18px;
     font-weight: bold;
     color: #333;
     margin-bottom: 10px;
 }
 
-/* 支出リスト */
+
+
+.details-link {
+    text-decoration: none;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.details-link:hover {
+    text-decoration: underline;
+}
+
+
+
+.sort-links {
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+/*支出リストのcss*/
+
 .expense-list {
     list-style: none;
     padding: 0;
+    margin: 0;
 }
 
 .expense-item {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 10px 0;
     border-bottom: 1px solid #eee;
 }
@@ -330,30 +359,42 @@ footer {
 }
 
 .expense-name {
+    flex: 2;
     font-weight: bold;
     color: #333;
 }
 
 .expense-amount {
+    flex: 1;
+    text-align: right;
+    color: #4CAF50;
     font-weight: bold;
-    color: #4a90e2;
+}
+
+.expense-detail {
+    flex: 3;
+    text-align: left;
+    color: #555;
 }
 
 .expense-date {
-    color: #666;
+    flex: 2;
+    text-align: right;
+    color: #999;
+}
+
+.expense-month {
+    font-weight: bold;
+    color: #91bfc5;
+}
+
+.expense-total {
     font-size: 14px;
+    color: #333;
 }
 
-/* 空データ対応 */
-.no-data {
-    text-align: center;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-.no-data img {
-    max-width: 150px;
-    margin-top: 10px;
+.expense-department {
+    flex: 2;
+    font-weight: bold;
+    color: #333;
 }

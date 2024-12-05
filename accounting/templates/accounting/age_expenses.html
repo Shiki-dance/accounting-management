@@ -27,7 +27,7 @@
                 {% for expense in data.details %}
                 <li class="expense-item">
                     <span class="expense-name">{{ expense.name }}</span>
-                    <span class="expense-amount">{{ expense.amount|intcomma }}円</span>
+                    <span class="expense-amount">{{ expense.amount}}円</span>
                     <span class="expense-date">{{ expense.date }}</span>
                 </li>
                 {% endfor %}
@@ -36,13 +36,7 @@
         {% endfor %}
     </div>
 
-    <!-- 空データ対応 -->
-    {% if not age_data %}
-    <div class="no-data">
-        <p>現在表示するデータがありません。</p>
-        <img src="{% static 'images/no-data.svg' %}" alt="No data available">
-    </div>
-    {% endif %}
+    
 </div>
 {% endblock %}
 
