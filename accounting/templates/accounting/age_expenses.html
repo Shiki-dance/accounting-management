@@ -1,28 +1,48 @@
 {% extends "accounting/base.html" %}
+
 {% block content %}
-
-<form method="get">
-    <label for="sort_by">並べ替え:</label>
-    <select name="sort_by" id="sort_by">
-        <option value="name" {% if request.GET.sort_by == 'name' %}selected{% endif %}>名前順</option>
-        <option value="amount" {% if request.GET.sort_by == 'amount' %}selected{% endif %}>金額順</option>
-        <option value="date" {% if request.GET.sort_by == 'date' %}selected{% endif %}>日付順</option>
-    </select>
-    <button type="submit">並べ替え</button>
-</form>
-
-    <h2>代ごとの支出</h2>
+<div class="content-container">
+    <h2 class="page-title">代ごとの支出</h2>
+    <p class="page-description">代ごとの支出合計や詳細情報を一覧で確認できます。</p>
     
-    <p>ここでは、代ごとの支出を確認できます。代ごとの支出合計や詳細情報を一覧で表示します。</p>
-
-    {% for age, data in age_data.items %}
-    <div class="age-group">
-        <h3>{{ age }}代 - 合計: {{ data.total }}円</h3>
-        <ul>
-            {% for expense in data.details %}
-                <li>{{ expense.name }}: {{ expense.amount }}円（{{ expense.date }}）</li>
-            {% endfor %}
-        </ul>
+    <!-- 並べ替えフォーム -->
+    <div class="sort-form">
+        <form method="get">
+            <label for="sort-by">並べ替え:</label>
+            <select name="sort_by" id="sort-by" class="form-control">
+                <option value="name">名前順</option>
+                <option value="amount">金額順</option>
+                <option value="date">日付順</option>
+            </select>
+            <button type="submit" class="btn-sort">適用</button>
+        </form>
     </div>
-    {% endfor %}
+
+    <!-- 代ごとの支出リスト -->
+    <div class="age-sections">
+        {% for age, data in age_data.items %}
+        <div class="age-section">
+            <h3 class="age-title">{{ age }}代 - 合計: {{ data.total|intcomma }}円</h3>
+            <ul class="expense-list">
+                {% for expense in data.details %}
+                <li class="expense-item">
+                    <span class="expense-name">{{ expense.name }}</span>
+                    <span class="expense-amount">{{ expense.amount|intcomma }}円</span>
+                    <span class="expense-date">{{ expense.date }}</span>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- 空データ対応 -->
+    {% if not age_data %}
+    <div class="no-data">
+        <p>現在表示するデータがありません。</p>
+        <img src="{% static 'images/no-data.svg' %}" alt="No data available">
+    </div>
+    {% endif %}
+</div>
 {% endblock %}
+

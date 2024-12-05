@@ -235,3 +235,125 @@ footer {
 .btn-submit:hover {
     background-color: #0056b3;
 }
+
+/* 全体のスタイル */
+.content-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.page-title {
+    font-size: 24px;
+    text-align: center;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.page-description {
+    text-align: center;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+/* 並べ替えフォーム */
+.sort-form {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
+.sort-form label {
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+.sort-form .form-control {
+    margin-right: 10px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.sort-form .btn-sort {
+    padding: 5px 15px;
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.sort-form .btn-sort:hover {
+    background-color: #357abd;
+}
+
+/* 代ごとのセクション */
+.age-sections {
+    margin-top: 20px;
+}
+
+.age-section {
+    margin-bottom: 30px;
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.age-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* 支出リスト */
+.expense-list {
+    list-style: none;
+    padding: 0;
+}
+
+.expense-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.expense-item:last-child {
+    border-bottom: none;
+}
+
+.expense-name {
+    font-weight: bold;
+    color: #333;
+}
+
+.expense-amount {
+    font-weight: bold;
+    color: #4a90e2;
+}
+
+.expense-date {
+    color: #666;
+    font-size: 14px;
+}
+
+/* 空データ対応 */
+.no-data {
+    text-align: center;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.no-data img {
+    max-width: 150px;
+    margin-top: 10px;
+}
