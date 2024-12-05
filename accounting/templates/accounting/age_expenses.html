@@ -22,7 +22,7 @@
     <div class="age-sections">
         {% for age, data in age_data.items %}
         <div class="age-section">
-            <h3 class="age-title">{{ age }}代 - 合計: {{ data.total|intcomma }}円</h3>
+            <h3 class="age-title">{{ age }}代 - 合計: {{ data.total}}円</h3>
             <ul class="expense-list">
                 {% for expense in data.details %}
                 <li class="expense-item">
