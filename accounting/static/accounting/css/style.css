@@ -255,7 +255,7 @@ footer {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.age-title , .department-title{
+.age-title , .department-title, .page-title{
     font-size: 18px;
     font-weight: bold;
     margin-bottom: 10px;
@@ -397,4 +397,42 @@ footer {
     flex: 2;
     font-weight: bold;
     color: #333;
+}
+
+.expense-category {
+    flex: 2;
+    font-weight: bold;
+    color: #333;
+}
+
+/*削除ボタン*/
+
+.btn-delete {
+    background-color: #ff6b6b;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.btn-delete:hover {
+    background-color: #ff4b4b;
+}
+
+.btn-confirm {
+    background-color: #ff6b6b;
+    color: #fff;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-cancel {
+    margin-left: 10px;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.btn-cancel:hover {
+    text-decoration: underline;
 }

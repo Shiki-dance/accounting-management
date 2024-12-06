@@ -214,7 +214,19 @@ def input_category(request):
         form = ExpenseCategoryForm()
     return render(request, 'accounting/input_category.html', {'form': form})
 
+def category_expense_list(request):
+    """ExpenseCategoryのリストを表示するビュー"""
+    expenses = ExpenseCategory.objects.all().order_by('-date')  # 日付で並べ替え
+    return render(request, 'accounting/category_expense_list.html', {'expenses': expenses})
 
+def delete_category_expense(request, pk):
+    """ExpenseCategoryのデータを削除するビュー"""
+    expense = get_object_or_404(ExpenseCategory, pk=pk)
+    if request.method == 'POST':
+        expense.delete()
+        messages.success(request, '支出データを削除しました。')
+        return redirect('category_expense_list')
+    return render(request, 'accounting/delete_confirm.html', {'expense': expense})
 
 def view_public_performance(request):
     performance_expenses = ExpenseCategory.objects.filter(category_name='公演費').order_by('age', 'name')

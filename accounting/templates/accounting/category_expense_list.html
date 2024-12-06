@@ -1,0 +1,23 @@
+{% extends "accounting/base.html" %}
+
+{% block content %}
+<div class="page-container">
+    <h2 class="page-title">支出リスト</h2>
+    <ul class="expense-list">
+        {% for expense in expenses %}
+        <li class="expense-item">
+            <span class="expense-name">{{ expense.name }}</span>
+            <span class="expense-amount">{{ expense.amount }}円</span>
+            <span class="expense-category">{{ expense.category_name }}</span>
+            <span class="expense-date">{{ expense.date }}</span>
+            <form method="post" action="{% url 'delete_category_expense' expense.pk %}" class="delete-form">
+                {% csrf_token %}
+                <button type="submit" class="btn-delete">削除</button>
+            </form>
+        </li>
+        {% endfor %}
+    </ul>
+    <!-- ホームに戻るリンク -->
+    <a href="{% url 'index' %}">ホームに戻る</a>
+</div>
+{% endblock %}
