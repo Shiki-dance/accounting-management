@@ -1,25 +1,22 @@
 {% extends "accounting/base.html" %}
 
 {% block content %}
-<h2>月会費一覧</h2>
+<div class="page-container">
+    <h2 class="page-title">月会費一覧</h2>
 
-{% for age, expenses in grouped_monthly_fee_expenses %}
-    <h3>{{ age }} 代</h3>
-    <table>
-        <tr>
-            <th>名前</th>
-            <th>金額</th>
-            <th>日付</th>
-        </tr>
-        {% for expense in expenses %}
-            <tr>
-                <td>{{ expense.name }}</td>
-                <td>{{ expense.amount }}円</td>
-                <td>{{ expense.date|date:"Y年m月d日" }}</td>
-            </tr>
-        {% endfor %}
-    </table>
-{% endfor %}
-
+    {% for age, expenses in grouped_monthly_fee_expenses %}
+    <div class="expense-group">
+        <h3 class="age-title">{{ age }}代</h3>
+        <ul class="expense-list">
+            {% for expense in expenses %}
+            <li class="expense-item">
+                <span class="expense-name">{{ expense.name }}</span>
+                <span class="expense-amount">{{ expense.amount }}円</span>
+                <span class="expense-date">{{ expense.date|date:"Y年m月d日" }}</span>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endfor %}
+</div>
 {% endblock %}
-
