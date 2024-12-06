@@ -7,6 +7,7 @@ body {
     color: #fff;
     margin: 0;
     padding: 0;
+    font-size: 16px; /* 基本フォントサイズを調整 */
 }
 
 /* ヘッダー */
@@ -90,7 +91,7 @@ header h1 {
     .main-nav {
         display: none;
         flex-direction: column;
-        background-color: #f7f7f7;
+        background-color: #e6e6e6;
         padding: 10px;
         position: absolute;
         top: 50px;
@@ -98,6 +99,9 @@ header h1 {
         border-radius: 10px;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         width: 200px;
+        transition: all 0.3s ease-in-out; /* スムーズな開閉 */
+        max-height: 300px; /* 高さを制限 */
+        overflow-y: auto; /* 縦スクロールを許可 */
     }
 
     .main-nav.open {
@@ -107,8 +111,10 @@ header h1 {
     .main-nav a {
         color: #333;
         text-decoration: none;
-        padding: 10px 0;
+        padding: 8px 10px; /* 縦横の余白を適度に調整 */
         text-align: left;
+        font-size: 14px; /* 小さめに設定 */
+        line-height: 1.5; /* 読みやすさを確保 */
     }
 
     .main-nav a:hover {
