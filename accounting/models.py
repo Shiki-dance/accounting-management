@@ -32,7 +32,7 @@ class ExpenseCategory(models.Model):
     CATEGORY_CHOICES = (
         ('公演費', '公演費'),
         ('月会費', '月会費'),
-        ('ダンパ費', 'ダンパ費'),
+        ('ベースメント費', 'ベースメント費'),
     )
     
     age = models.IntegerField()
