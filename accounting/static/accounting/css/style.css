@@ -269,9 +269,9 @@ footer {
     font-size: 18px;
     font-weight: bold;
     margin-bottom: 10px;
-    color: #333;
+    color: #eeecec;
     text-align: left;
-    border-bottom: 2px solid #007bff;
+    border-bottom: 2px solid #358be6;
     padding-bottom: 5px;
 }
 
@@ -280,7 +280,7 @@ footer {
 .page-description {
     font-size: 16px;
     margin-bottom: 20px;
-    color: #555;
+    color: #eeecec;
 }
 
 .page-container {
@@ -296,7 +296,7 @@ footer {
     font-size: 24px;
     font-weight: bold;
     margin-bottom: 20px;
-    color: #333;
+    color: #eeecec;
 }
 
 .total-amount {
