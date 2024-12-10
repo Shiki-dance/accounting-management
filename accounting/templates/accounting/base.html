@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}会計管理システム{% endblock %}</title>
+    <title>{% block title %}DLC会計管理システム{% endblock %}</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'accounting/css/style.css' %}">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
@@ -11,7 +11,7 @@
 <body>
     <header>
         <div class="header-container">
-            <h1>会計管理システム</h1>
+            <h1>DLC会計管理システム</h1>
             {% if request.path != "/" %}
             <button class="menu-toggle" id="menuToggle">☰</button>
             {% endif %}

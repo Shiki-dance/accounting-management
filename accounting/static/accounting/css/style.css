@@ -1,8 +1,8 @@
-/* 全体設定 */
+/*全体設定 */
 body {
     font-family: 'Roboto', Arial, sans-serif;
     /*背景にグラデーションを採用*/
-    background: linear-gradient(135deg, #1e90ff, #ff7f50);
+    background: linear-gradient(135deg, #569be0, #ff7f50);
     /*文字色を白に指定*/
     color: #fff;
     margin: 0;
@@ -16,12 +16,12 @@ header {
     text-align: center;
     padding: 20px 10px;
     /*半透明の背景を選択*/
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgb(231, 221, 221);
 }
 
 header h1 {
     font-size: 2.5rem;
-    color: #fff;
+    color: #c77d7d;
     margin: 0;
 }
 
@@ -29,7 +29,7 @@ header h1 {
 .main-nav {
     display: flex;
     justify-content: center;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(204, 106, 41, 0.7);
 }
 
 .main-nav ul {
@@ -62,7 +62,7 @@ header h1 {
 }
 
 .main-nav .active a {
-    background: #ff7f50;
+    background: #e66216;
     font-weight: bold;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
@@ -113,8 +113,12 @@ header h1 {
         text-decoration: none;
         padding: 8px 10px; /* 縦横の余白を適度に調整 */
         text-align: left;
-        font-size: 14px; /* 小さめに設定 */
+        font-size: 12px; /* 小さめに設定 */
         line-height: 1.5; /* 読みやすさを確保 */
+    }
+
+    .page-title, .expense-name, .expense-amount {
+        font-size: 14px;
     }
 
     .main-nav a:hover {
@@ -172,7 +176,7 @@ button.submit-btn:hover {
 footer {
     text-align: center;
     padding: 20px;
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(90, 77, 77, 0.034);
     color: #fff;
 }
 
