@@ -2,7 +2,7 @@
 body {
     font-family: 'Roboto', Arial, sans-serif;
     /*背景にグラデーションを採用*/
-    background: linear-gradient(135deg, #569be0, #ff7f50);
+    background: linear-gradient(135deg, #649fda, #ff7f50);
     /*文字色を白に指定*/
     color: #fff;
     margin: 0;
@@ -16,7 +16,7 @@ header {
     text-align: center;
     padding: 20px 10px;
     /*半透明の背景を選択*/
-    background-color: rgb(231, 221, 221);
+    background-color: rgb(250, 250, 250);
 }
 
 header h1 {
