@@ -269,7 +269,7 @@ footer {
     font-size: 18px;
     font-weight: bold;
     margin-bottom: 10px;
-    color: #eeecec;
+    color: #333;
     text-align: left;
     border-bottom: 2px solid #358be6;
     padding-bottom: 5px;
@@ -297,6 +297,13 @@ footer {
     font-weight: bold;
     margin-bottom: 20px;
     color: #eeecec;
+}
+
+.page-title2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
 }
 
 .total-amount {
