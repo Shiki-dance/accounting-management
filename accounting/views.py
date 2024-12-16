@@ -13,7 +13,10 @@ from django.contrib import messages
 import logging
 from itertools import groupby
 from .models import Expense
-
+from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase.ttfonts import TTFont
+from reportlab.lib.pagesizes import A4
+import os
 
 logger = logging.getLogger(__name__)
 
@@ -139,7 +142,17 @@ def index(request):
     
     return render(request, 'accounting/index.html') 
 
+#pdfに出力する
 def export_department_expenses_pdf(request):
+    # プロジェクトのベースディレクトリを取得
+    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+    # フォントファイルへの絶対パスを生成
+    font_path = os.path.join(BASE_DIR, 'accounting', 'static', 'accounting', 'css', 'ipaexg.ttf')
+
+    # フォントを登録
+    pdfmetrics.registerFont(TTFont('IPAexGothic', font_path))  # IPAexフォントを使用
+
     # HTTPレスポンスをPDF形式で作成
     response = HttpResponse(content_type='application/pdf')
     response['Content-Disposition'] = 'attachment; filename="department_expenses.pdf"'
@@ -148,11 +161,10 @@ def export_department_expenses_pdf(request):
     pdf_canvas = canvas.Canvas(response)
 
     # タイトル
-    pdf_canvas.setFont("Helvetica-Bold", 16)
+    pdf_canvas.setFont("IPAexGothic", 16)
     pdf_canvas.drawString(100, 800, "係りごとの支出一覧")
-    pdf_canvas.setFont("Helvetica", 12)
+    pdf_canvas.setFont("IPAexGothic", 12)
 
-    # データの取得と表示位置の初期化
     y_position = 750
     departments = Expense.objects.values('department').distinct()
 
@@ -161,24 +173,24 @@ def export_department_expenses_pdf(request):
         expenses = Expense.objects.filter(department=department)
         total = expenses.aggregate(Sum('amount'))['amount__sum']
 
-        # 係りごとの合計をPDFに追加
         pdf_canvas.drawString(50, y_position, f"係り: {department} - 合計: {total}円")
         y_position -= 20
 
-        # 各支出の詳細を追加
         for expense in expenses:
-            pdf_canvas.drawString(70, y_position, f"- {expense.name}: {expense.amount}円（{expense.date}）")
+            if expense.department == '渉外':
+               pdf_canvas.drawString(70, y_position, f"- {expense.name}: {expense.amount}円 {expense.institution}（{expense.date}）")
+            else:
+               pdf_canvas.drawString(70, y_position, f"- {expense.name}: {expense.amount}円 {expense.content}（{expense.date}）")
             y_position -= 15
 
-            # ページいっぱいになったら改ページ
             if y_position < 50:
                 pdf_canvas.showPage()
-                pdf_canvas.setFont("Helvetica", 12)
+                pdf_canvas.setFont("IPAexGothic", 12)
                 y_position = 750
 
-    # PDFを完成させる
     pdf_canvas.save()
     return response
+
 
 def month_details(request, year, month):
     # 並べ替え基準を取得（デフォルトは 'name'）
@@ -240,8 +252,75 @@ def view_monthly_fee(request):
     grouped_monthly_fee_expenses = [(age, list(expenses)) for age, expenses in grouped_monthly_fee_expenses]
     return render(request, 'accounting/view_monthly_fee.html', {'grouped_monthly_fee_expenses': grouped_monthly_fee_expenses})
 
-def view_dance_party(request):
-    dance_party_expenses = ExpenseCategory.objects.filter(category_name='ダンパ費').order_by('age', 'name')
-    grouped_dance_party_expenses = groupby(dance_party_expenses, key=lambda x: x.age)
-    grouped_dance_party_expenses = [(age, list(expenses)) for age, expenses in grouped_dance_party_expenses]
-    return render(request, 'accounting/view_dance_party.html', {'grouped_dance_party_expenses': grouped_dance_party_expenses})
+def view_basement(request):
+    basement_expenses = ExpenseCategory.objects.filter(category_name='ダンパ費').order_by('age', 'name')
+    grouped_basement_expenses = groupby(basement_expenses, key=lambda x: x.age)
+    grouped_basement_expenses = [(age, list(expenses)) for age, expenses in grouped_basement_expenses]
+    return render(request, 'accounting/view_basement.html', {'grouped_basement_expenses': grouped_basement_expenses})
+
+
+from django.shortcuts import render, get_object_or_404
+from .models import Member, PaymentItem, PaymentStatus
+
+def member_list(request):
+    # 支払い項目一覧を取得
+    payment_items = PaymentItem.objects.all()
+    selected_item = request.GET.get('payment_item')
+
+    # 代ごとの支払いステータスを分類
+    categorized_statuses = {}
+
+    if selected_item:
+        # 選択された支払い項目を取得
+        payment_item = get_object_or_404(PaymentItem, id=selected_item)
+        payment_statuses = PaymentStatus.objects.filter(payment_item=payment_item)
+
+        # 支払いステータスを分類
+        for status in payment_statuses:
+            generation = str(status.member.generation)  # 文字列で統一
+            if generation not in categorized_statuses:
+                categorized_statuses[generation] = {'paid': [], 'unpaid': []}
+            
+            # 支払い済みかどうかで分類
+            if status.is_paid:
+                categorized_statuses[generation]['paid'].append(status)
+            else:
+                categorized_statuses[generation]['unpaid'].append(status)
+
+    context = {
+        'payment_items': payment_items,
+        'categorized_statuses': categorized_statuses,
+        'selected_item': selected_item,
+    }
+
+    return render(request, 'accounting/member_list.html', context)
+
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.shortcuts import redirect
+from .models import PaymentStatus
+
+
+def update_status_batch(request):
+    if request.method == "POST":
+        try:
+            # POSTデータから支払い項目IDとチェック済みのメンバーIDリストを取得
+            payment_item_id = request.POST.get('payment_item_id')
+            checked_member_ids = request.POST.getlist('statuses')
+
+            if not payment_item_id or not checked_member_ids:
+                return JsonResponse({'success': False, 'error': 'Invalid data provided'}, status=400)
+
+            # 支払いステータスをリセット
+            PaymentStatus.objects.filter(payment_item_id=payment_item_id).update(is_paid=False)
+
+            # チェックされたメンバーのみ支払い済みに更新
+            PaymentStatus.objects.filter(payment_item_id=payment_item_id, member_id__in=checked_member_ids).update(is_paid=True)
+
+            # リダイレクトで元のページに戻る
+            return redirect(f'/accounting/member_list/?payment_item={payment_item_id}')
+        except Exception as e:
+            print("Error:", str(e))
+            return JsonResponse({'success': False, 'error': 'An error occurred'}, status=500)
+
+    return JsonResponse({'success': False, 'error': 'Invalid request method'}, status=405)

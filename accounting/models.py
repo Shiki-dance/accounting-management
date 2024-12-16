@@ -43,3 +43,34 @@ class ExpenseCategory(models.Model):
 
     def __str__(self):
         return self.category_name
+    
+# チェックリストの表示
+#メンバーのモデル
+class Member(models.Model):
+    name = models.CharField(max_length=100)
+    generation = models.IntegerField()
+    # 支払い済みかどうか（チェックボックスに対応）
+    status = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"{self.generation}代 - {self.name}"
+# 支払い項目のモデル
+class PaymentItem(models.Model):
+    name = models.CharField(max_length=100)  # 例: 打ち上げ代
+    amount = models.DecimalField(max_digits=10, decimal_places=2, default=0.0)  # デフォルト値を設定
+    members = models.ManyToManyField(Member, related_name='payment_items')  # 多対多の関係
+
+    def __str__(self):
+        return self.name
+
+# 支払い状況を管理する中間テーブル
+class PaymentStatus(models.Model):
+    member = models.ForeignKey(Member, on_delete=models.CASCADE)
+    payment_item = models.ForeignKey(PaymentItem, on_delete=models.CASCADE)
+    is_paid = models.BooleanField(default=False)  # 支払い済みか否か
+
+    class Meta:
+        unique_together = ('member', 'payment_item')  # 同じ組み合わせの重複を防ぐ
+
+    def __str__(self):
+        return f"{self.member.name} - {self.payment_item.name} - {'支払い済み' if self.is_paid else '未払い'}"

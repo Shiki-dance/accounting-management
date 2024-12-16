@@ -303,7 +303,7 @@ footer {
     font-size: 24px;
     font-weight: bold;
     margin-bottom: 20px;
-    color: #333;
+    color: #5e5959;
 }
 
 .total-amount {
@@ -452,4 +452,34 @@ footer {
 
 .btn-cancel:hover {
     text-decoration: underline;
+}
+
+/* メンバーリストのスタイル */
+.status-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1rem;
+}
+
+.status-table th,
+.status-table td {
+    border: 1px solid #ddd;
+    padding: 0.75rem;
+    text-align: left;
+}
+
+.status-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+.status-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.no-selection-message {
+    text-align: center;
+    margin-top: 2rem;
+    font-size: 1.1rem;
+    color: #666;
 }

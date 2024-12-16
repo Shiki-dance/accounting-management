@@ -1,6 +1,7 @@
 from django import forms
 from .models import Expense
 from .models import ExpenseCategory
+# from .models import ExpenseKikaku
 
 class ExpenseForm(forms.ModelForm):
     class Meta:
@@ -29,3 +30,16 @@ class ExpenseCategoryForm(forms.ModelForm):
             'category_name': '項目',
             'date': '日付',
         }
+"""
+class ExpenseKikakuForm(forms.ModelForm):
+    class Meta:
+        model = ExpenseCategory
+        fields = ['age', 'name', 'amount', 'kikaku_name', 'date']
+        labels = {
+            'age': '代',
+            'name': 'ダンサーネーム',
+            'amount': '金額',
+            'kikaku_name': '項目',
+            'date': '日付',
+        }
+"""
