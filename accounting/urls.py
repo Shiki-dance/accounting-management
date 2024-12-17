@@ -26,5 +26,6 @@ urlpatterns = [
     path('view_basement/', views.view_basement, name='view_basement'), # ベースメント費
     path('update_status_batch/', views.update_status_batch, name='update_status_batch'),
     path('member_list/', views.member_list, name='member_list'),
+    path('tuuzyouki_expenses/', views.tuuzyouki_expenses, name='tuuzyouki_expenses'),
 ]
 

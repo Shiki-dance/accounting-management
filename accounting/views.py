@@ -264,7 +264,7 @@ from .models import Member, PaymentItem, PaymentStatus
 
 def member_list(request):
     # 支払い項目一覧を取得
-    payment_items = PaymentItem.objects.all()
+    payment_items = PaymentItem.objects.filter(name__in=['ダンパ費', '夏旅行代', '打ち上げ代'])  
     selected_item = request.GET.get('payment_item')
 
     # 代ごとの支払いステータスを分類
@@ -295,6 +295,41 @@ def member_list(request):
 
     return render(request, 'accounting/member_list.html', context)
 
+def tuuzyouki_expenses(request):
+    # 支払い項目一覧を取得 (新しい3つの項目のみをフィルタリング)
+    payment_items = PaymentItem.objects.filter(name__in=['公演費', '月会費', 'ベースメント費'])  # 例: DEF項目
+    selected_item = request.GET.get('payment_item')
+
+    # 代ごとの支払いステータスを分類
+    categorized_statuses = {}
+
+    if selected_item:
+        # 選択された支払い項目を取得
+        payment_item = get_object_or_404(PaymentItem, id=selected_item)
+        payment_statuses = PaymentStatus.objects.filter(payment_item=payment_item)
+
+        # 支払いステータスを分類
+        for status in payment_statuses:
+            generation = str(status.member.generation)  # 文字列で統一
+            if generation not in categorized_statuses:
+                categorized_statuses[generation] = {'paid': [], 'unpaid': []}
+            
+            # 支払い済みかどうかで分類
+            if status.is_paid:
+                categorized_statuses[generation]['paid'].append(status)
+            else:
+                categorized_statuses[generation]['unpaid'].append(status)
+
+    context = {
+        'payment_items': payment_items,
+        'categorized_statuses': categorized_statuses,
+        'selected_item': selected_item,
+    }
+
+    return render(request, 'accounting/tuuzyouki_expenses.html', context)
+
+    
+
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import redirect
@@ -304,21 +339,24 @@ from .models import PaymentStatus
 def update_status_batch(request):
     if request.method == "POST":
         try:
-            # POSTデータから支払い項目IDとチェック済みのメンバーIDリストを取得
+            # POSTデータから必要な情報を取得
             payment_item_id = request.POST.get('payment_item_id')
-            checked_member_ids = request.POST.getlist('statuses')
+            checked_member_ids = request.POST.getlist('statuses')  # 空リストになる可能性あり
+            redirect_url = request.POST.get('redirect_url', '/accounting/member_list/')
 
-            if not payment_item_id or not checked_member_ids:
+            if not payment_item_id:
                 return JsonResponse({'success': False, 'error': 'Invalid data provided'}, status=400)
 
-            # 支払いステータスをリセット
+            # 支払いステータスをリセット (全メンバーの is_paid を False に)
             PaymentStatus.objects.filter(payment_item_id=payment_item_id).update(is_paid=False)
 
             # チェックされたメンバーのみ支払い済みに更新
-            PaymentStatus.objects.filter(payment_item_id=payment_item_id, member_id__in=checked_member_ids).update(is_paid=True)
+            if checked_member_ids:  # checked_member_ids が空でない場合のみ実行
+                PaymentStatus.objects.filter(payment_item_id=payment_item_id, member_id__in=checked_member_ids).update(is_paid=True)
 
-            # リダイレクトで元のページに戻る
-            return redirect(f'/accounting/member_list/?payment_item={payment_item_id}')
+            # 動的なリダイレクトURL
+            return redirect(f'{redirect_url}?payment_item={payment_item_id}')
+
         except Exception as e:
             print("Error:", str(e))
             return JsonResponse({'success': False, 'error': 'An error occurred'}, status=500)

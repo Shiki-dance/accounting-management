@@ -18,7 +18,7 @@ document.getElementById('payment-form').addEventListener('submit', function (eve
             'X-CSRFToken': getCSRFToken(),
         },
         body: new URLSearchParams({
-            statuses: [1, 2, 3],  // 複数のID
+            statuses: [1, 2, 3, ],  // 複数のID
         }),
     })
     

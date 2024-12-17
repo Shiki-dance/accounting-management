@@ -74,3 +74,6 @@ class PaymentStatus(models.Model):
 
     def __str__(self):
         return f"{self.member.name} - {self.payment_item.name} - {'支払い済み' if self.is_paid else '未払い'}"
+
+
+
