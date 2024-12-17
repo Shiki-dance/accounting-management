@@ -161,6 +161,41 @@ header h1 {
         background-color: #007bff;
         color: white;
     }
+    /* チェックリストテーブル */
+    .status-table {
+        width: 100%;
+        border-collapse: collapse; /* 枠線を統一 */
+        margin-bottom: 10px; /* テーブルの下余白を減らす */
+    }
+
+    .status-table th, .status-table td {
+        padding: 4px 6px; /* セル内の余白を少なく */
+        font-size: 0.8rem; /* フォントサイズを小さく */
+        text-align: left; /* テキストを左揃え */
+    }
+
+    .status-table th {
+        font-weight: bold;
+    }
+
+    /* チェックボックスを小さく */
+    .status-table input[type="checkbox"] {
+        transform: scale(0.8); /* チェックボックスを縮小 */
+        margin-right: 4px; /* テキストとの間隔を縮める */
+    }
+
+    /* テーブル全体をスクロール可能に */
+    .table-wrapper {
+        overflow-x: auto;
+        margin-bottom: 10px;
+    }
+
+    /* ボタンのサイズをコンパクトに */
+    button {
+        font-size: 0.8rem;
+        padding: 6px 10px; /* ボタンの余白を小さく */
+        margin-top: 8px; /* ボタンの上余白 */
+    }
 }
 /* メインコンテンツ */
 .form-container {
