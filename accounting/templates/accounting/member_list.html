@@ -87,11 +87,11 @@
 
     <!-- リセットボタンセクション -->
 <div class="reset-section" style="margin-top: 2rem; text-align: center; border-top: 2px solid #ccc; padding-top: 1rem;">
-    <h4 style="color: red;">すべてのステータスをリセットしますか？</h4>
+    <h4 style="color: rgba(255, 94, 0, 0.856);">すべてのステータスをリセットしますか？</h4>
     <form method="POST" action="{% url 'reset_status' %}">
         {% csrf_token %}
         <input type="hidden" name="payment_item_id" value="{{ selected_item }}">
-        <button type="submit" class="btn-delete" style="background-color: #ff4d4f; color: white; border: none; padding: 0.5rem 1.5rem; border-radius: 5px;">
+        <button type="submit" class="btn-delete" style="background-color: #fd7c11e5; color: white; border: none; padding: 0.5rem 1.5rem; border-radius: 5px;">
             すべてリセット
         </button>
     </form>
