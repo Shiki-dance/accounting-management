@@ -87,7 +87,7 @@ header h1 {
 
    
     body {
-        font-size: 14px; /* モバイル時の基本フォントサイズを小さく */
+        font-size: 13px; /* モバイル時の基本フォントサイズを小さく */
         }
     
     header h1 {
@@ -95,28 +95,28 @@ header h1 {
         }
     
     .main-nav a {
-        font-size: 0.9rem; /* ナビゲーションリンクのフォントサイズを小さく */
+        font-size: 0.85rem; /* ナビゲーションリンクのフォントサイズを小さく */
         }
     
     .form-title {
-        font-size: 1.2rem; /* フォームタイトルを小さく */
+        font-size: 1.15rem; /* フォームタイトルを小さく */
         }
     
     .form-description {
-        font-size: 0.9rem; /* 説明文を小さく */
+        font-size: 0.85rem; /* 説明文を小さく */
         }
     
     .form-control, label, button {
-        font-size: 0.9rem; /* 入力フォームやラベル、ボタンも小さく */
+        font-size: 0.85rem; /* 入力フォームやラベル、ボタンも小さく */
         }
     
     .status-table th,
     .status-table td {
-        font-size: 0.8rem; /* テーブルのフォントサイズを小さく */
+        font-size: 0.75rem; /* テーブルのフォントサイズを小さく */
         }
     
     footer p {
-        font-size: 0.8rem; /* フッターのテキストも小さく */
+        font-size: 0.75rem; /* フッターのテキストも小さく */
         }
     
     
