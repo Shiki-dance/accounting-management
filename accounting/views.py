@@ -362,3 +362,25 @@ def update_status_batch(request):
             return JsonResponse({'success': False, 'error': 'An error occurred'}, status=500)
 
     return JsonResponse({'success': False, 'error': 'Invalid request method'}, status=405)
+
+from django.http import JsonResponse
+from django.shortcuts import redirect
+from .models import PaymentStatus
+
+def reset_status(request):
+    if request.method == "POST":
+        try:
+            payment_item_id = request.POST.get('payment_item_id')
+
+            if not payment_item_id:
+                return JsonResponse({'success': False, 'error': 'Invalid data provided'}, status=400)
+
+            # 支払いステータスを全てリセット (is_paid=False)
+            PaymentStatus.objects.filter(payment_item_id=payment_item_id).update(is_paid=False)
+
+            return redirect(f'/accounting/member_list/?payment_item={payment_item_id}')
+        except Exception as e:
+            print("Error:", str(e))
+            return JsonResponse({'success': False, 'error': 'An error occurred'}, status=500)
+
+    return JsonResponse({'success': False, 'error': 'Invalid request method'}, status=405)

@@ -18,7 +18,8 @@
         </div>
         <button type="submit" class="submit-btn">表示</button>
     </form>
-
+    
+    
     {% if categorized_statuses %}
     <form method="post" action="{% url 'update_status_batch' %}" class="styled-form">
         {% csrf_token %}
@@ -83,6 +84,19 @@
         
         <button type="submit" class="button.submit-btn">保存</button>
     </form>
+
+    <!-- リセットボタンセクション -->
+<div class="reset-section" style="margin-top: 2rem; text-align: center; border-top: 2px solid #ccc; padding-top: 1rem;">
+    <h4 style="color: red;">すべてのステータスをリセットしますか？</h4>
+    <form method="POST" action="{% url 'reset_status' %}">
+        {% csrf_token %}
+        <input type="hidden" name="payment_item_id" value="{{ selected_item }}">
+        <button type="submit" class="btn-delete" style="background-color: #ff4d4f; color: white; border: none; padding: 0.5rem 1.5rem; border-radius: 5px;">
+            すべてリセット
+        </button>
+    </form>
+</div>
+
     {% else %}
     <p class="no-selection-message">支払い項目を選択してください。</p>
     {% endif %}
