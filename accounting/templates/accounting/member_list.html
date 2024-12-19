@@ -24,7 +24,8 @@
     <form method="post" action="{% url 'update_status_batch' %}" class="styled-form">
         {% csrf_token %}
         <input type="hidden" name="payment_item_id" value="{{ selected_item }}">
-
+        <input type="hidden" name="redirect_url" value="{% url 'member_list' %}">
+        
         <!-- 代ごとにリストを表示 -->
         {% for generation, statuses in categorized_statuses.items %}
         <div class="age-section">

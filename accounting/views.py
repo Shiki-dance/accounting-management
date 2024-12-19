@@ -335,14 +335,12 @@ from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import redirect
 from .models import PaymentStatus
 
-
 def update_status_batch(request):
     if request.method == "POST":
         try:
             # POSTデータから必要な情報を取得
             payment_item_id = request.POST.get('payment_item_id')
             checked_member_ids = request.POST.getlist('statuses')  # 空リストになる可能性あり
-            redirect_url = request.POST.get('redirect_url', '/accounting/member_list/')
 
             if not payment_item_id:
                 return JsonResponse({'success': False, 'error': 'Invalid data provided'}, status=400)
@@ -354,8 +352,11 @@ def update_status_batch(request):
             if checked_member_ids:  # checked_member_ids が空でない場合のみ実行
                 PaymentStatus.objects.filter(payment_item_id=payment_item_id, member_id__in=checked_member_ids).update(is_paid=True)
 
-            # 動的なリダイレクトURL
-            return redirect(f'{redirect_url}?payment_item={payment_item_id}')
+            # リクエスト元ページに基づいてリダイレクト先を変更
+            if 'tuuzyouki_expenses' in request.META.get('HTTP_REFERER', ''):
+                return redirect(f'/accounting/tuuzyouki_expenses/?payment_item={payment_item_id}')
+            else:
+                return redirect(f'/accounting/member_list/?payment_item={payment_item_id}')
 
         except Exception as e:
             print("Error:", str(e))
@@ -370,6 +371,7 @@ from .models import PaymentStatus
 def reset_status(request):
     if request.method == "POST":
         try:
+            # POSTデータから支払い項目IDを取得
             payment_item_id = request.POST.get('payment_item_id')
 
             if not payment_item_id:
@@ -378,9 +380,15 @@ def reset_status(request):
             # 支払いステータスを全てリセット (is_paid=False)
             PaymentStatus.objects.filter(payment_item_id=payment_item_id).update(is_paid=False)
 
-            return redirect(f'/accounting/member_list/?payment_item={payment_item_id}')
+            # リクエスト元ページに基づいてリダイレクト先を変更
+            if 'tuuzyouki_expenses' in request.META.get('HTTP_REFERER', ''):
+                return redirect(f'/accounting/tuuzyouki_expenses/?payment_item={payment_item_id}')
+            else:
+                return redirect(f'/accounting/member_list/?payment_item={payment_item_id}')
+
         except Exception as e:
             print("Error:", str(e))
             return JsonResponse({'success': False, 'error': 'An error occurred'}, status=500)
 
     return JsonResponse({'success': False, 'error': 'Invalid request method'}, status=405)
+
