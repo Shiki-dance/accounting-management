@@ -67,11 +67,14 @@ def create_expenses(request):
         if form.is_valid():
             form.save()  # フォームデータを保存
             return redirect('expense_list')  # データ保存後、支出リストページにリダイレクト
+        else:
+            # エラーがある場合、ログに記録
+            print(form.errors)
     else:
         form = ExpenseForm()  # GETリクエスト時は空のフォームを表示
 
     return render(request, 'accounting/create_expenses.html', {'form': form})
-   
+
 from django.shortcuts import render
 from .models import Expense  # Expenseモデルをインポート
 

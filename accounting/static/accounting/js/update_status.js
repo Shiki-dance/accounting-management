@@ -1,6 +1,7 @@
 // CSRFトークンを取得する関数
 function getCSRFToken() {
     const csrfInput = document.querySelector('[name=csrfmiddlewaretoken]');
+    console.log(csrfInput ? csrfInput.value : 'CSRFトークンが見つかりません');
     return csrfInput ? csrfInput.value : '';
 }
 
@@ -18,7 +19,7 @@ document.getElementById('payment-form').addEventListener('submit', function (eve
             'X-CSRFToken': getCSRFToken(),
         },
         body: new URLSearchParams({
-            statuses: [1, 2, 3, ],  // 複数のID
+            statuses: selectedStatuses.join(','), 
         }),
     })
     
