@@ -19,9 +19,6 @@ header {
     padding: 20px 10px;
     /*半透明の背景を選択*/
     background-color: rgb(250, 250, 250);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
 }
 
 header h1 {
