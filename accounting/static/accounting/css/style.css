@@ -9,7 +9,6 @@ body {
     padding: 0;
     font-size: 16px; /* 基本フォントサイズを調整 */
     opacity: 0;
-    transition: opacity 0.5s ease-in-out;
 }
 
 body.loaded {
@@ -76,12 +75,7 @@ header h1 {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
-.parallax {
-    background: url('html_back_dance.png') no-repeat center center fixed;
-    background-size: cover;
-    height: 300px;
-    position: relative;
-}
+
 
 /* ハンバーガーメニュー */
 .menu-toggle {
