@@ -8,6 +8,12 @@ body {
     margin: 0;
     padding: 0;
     font-size: 16px; /* 基本フォントサイズを調整 */
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+body.loaded {
+    opacity: 1;
 }
 
 /* ヘッダー */
@@ -17,6 +23,9 @@ header {
     padding: 20px 10px;
     /*半透明の背景を選択*/
     background-color: rgb(250, 250, 250);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
 header h1 {
@@ -65,6 +74,13 @@ header h1 {
     background: #e66216;
     font-weight: bold;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.parallax {
+    background: url('html_back_dance.png') no-repeat center center fixed;
+    background-size: cover;
+    height: 300px;
+    position: relative;
 }
 
 /* ハンバーガーメニュー */
@@ -138,6 +154,7 @@ header h1 {
         transition: all 0.3s ease-in-out; /* スムーズな開閉 */
         max-height: 300px; /* 高さを制限 */
         overflow-y: auto; /* 縦スクロールを許可 */
+        transition: max-height 0.5s ease-in-out;
     }
 
     .main-nav.open {
