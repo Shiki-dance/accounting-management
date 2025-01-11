@@ -145,7 +145,6 @@ header h1 {
         transition: all 0.3s ease-in-out; /* スムーズな開閉 */
         max-height: 300px; /* 高さを制限 */
         overflow-y: auto; /* 縦スクロールを許可 */
-        transition: max-height 0.5s ease-in-out;
     }
 
     .main-nav.open {
