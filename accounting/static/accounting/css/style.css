@@ -139,7 +139,6 @@ header h1 {
         border-radius: 10px;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         width: 200px;
-        transition: all 0.3s ease-in-out; /* スムーズな開閉 */
         max-height: 300px; /* 高さを制限 */
         overflow-y: auto; /* 縦スクロールを許可 */
     }

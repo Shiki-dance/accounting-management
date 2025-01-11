@@ -10,6 +10,8 @@ body {
     font-size: 16px; /* 基本フォントサイズを調整 */
 }
 
+
+
 /* ヘッダー */
 header {
     /*ヘッダーを中央ぞろえにする*/
@@ -67,6 +69,8 @@ header h1 {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
+
+
 /* ハンバーガーメニュー */
 .menu-toggle {
     display: none;
@@ -84,6 +88,42 @@ header h1 {
 
 /* メディアクエリでスマホ表示時のメニュー動作を制御 */
 @media (max-width: 768px) {
+
+   
+    body {
+        font-size: 13px; /* モバイル時の基本フォントサイズを小さく */
+        }
+    
+    header h1 {
+        font-size: 1.8rem; /* ヘッダーのタイトルを少し小さく */
+        }
+    
+    .main-nav a {
+        font-size: 0.85rem; /* ナビゲーションリンクのフォントサイズを小さく */
+        }
+    
+    .form-title {
+        font-size: 1.15rem; /* フォームタイトルを小さく */
+        }
+    
+    .form-description {
+        font-size: 0.85rem; /* 説明文を小さく */
+        }
+    
+    .form-control, label, button {
+        font-size: 0.85rem; /* 入力フォームやラベル、ボタンも小さく */
+        }
+    
+    .status-table th,
+    .status-table td {
+        font-size: 0.75rem; /* テーブルのフォントサイズを小さく */
+        }
+    
+    footer p {
+        font-size: 0.75rem; /* フッターのテキストも小さく */
+        }
+    
+    
     .menu-toggle {
         display: block;
     }
@@ -99,7 +139,6 @@ header h1 {
         border-radius: 10px;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         width: 200px;
-        transition: all 0.3s ease-in-out; /* スムーズな開閉 */
         max-height: 300px; /* 高さを制限 */
         overflow-y: auto; /* 縦スクロールを許可 */
     }
@@ -118,12 +157,47 @@ header h1 {
     }
 
     .page-title, .expense-name, .expense-amount {
-        font-size: 12px;
+        font-size: 11px;
     }
 
     .main-nav a:hover {
         background-color: #007bff;
         color: white;
+    }
+    /* チェックリストテーブル */
+    .status-table {
+        width: 100%;
+        border-collapse: collapse; /* 枠線を統一 */
+        margin-bottom: 10px; /* テーブルの下余白を減らす */
+    }
+
+    .status-table th, .status-table td {
+        padding: 4px 6px; /* セル内の余白を少なく */
+        font-size: 0.8rem; /* フォントサイズを小さく */
+        text-align: left; /* テキストを左揃え */
+    }
+
+    .status-table th {
+        font-weight: bold;
+    }
+
+    /* チェックボックスを小さく */
+    .status-table input[type="checkbox"] {
+        transform: scale(0.8); /* チェックボックスを縮小 */
+        margin-right: 4px; /* テキストとの間隔を縮める */
+    }
+
+    /* テーブル全体をスクロール可能に */
+    .table-wrapper {
+        overflow-x: auto;
+        margin-bottom: 10px;
+    }
+
+    /* ボタンのサイズをコンパクトに */
+    button {
+        font-size: 0.8rem;
+        padding: 6px 10px; /* ボタンの余白を小さく */
+        margin-top: 8px; /* ボタンの上余白 */
     }
 }
 /* メインコンテンツ */
@@ -303,7 +377,7 @@ footer {
     font-size: 24px;
     font-weight: bold;
     margin-bottom: 20px;
-    color: #333;
+    color: #5e5959;
 }
 
 .total-amount {
@@ -452,4 +526,39 @@ footer {
 
 .btn-cancel:hover {
     text-decoration: underline;
+}
+
+/* メンバーリストのスタイル */
+
+.status-section {
+    margin-bottom: 1.5rem;
+}
+
+.status-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1rem;
+}
+
+.status-table th,
+.status-table td {
+    border: 1px solid #ddd;
+    padding: 0.75rem;
+    text-align: left;
+}
+
+.status-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+.status-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.no-selection-message {
+    text-align: center;
+    margin-top: 2rem;
+    font-size: 1.1rem;
+    color: #666;
 }

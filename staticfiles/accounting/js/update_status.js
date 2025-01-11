@@ -1,24 +1,44 @@
-document.querySelectorAll('.status-checkbox').forEach(checkbox => {
-    checkbox.addEventListener('change', function () {
-        const memberId = this.closest('tr').dataset.memberId;
-        const status = this.checked;
+// CSRFトークンを取得する関数
+function getCSRFToken() {
+    const csrfInput = document.querySelector('[name=csrfmiddlewaretoken]');
+    console.log(csrfInput ? csrfInput.value : 'CSRFトークンが見つかりません');
+    return csrfInput ? csrfInput.value : '';
+}
 
-        fetch('/update_status/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRFToken': '{{ csrf_token }}',
-            },
-            body: JSON.stringify({
-                member_id: memberId,
-                status: status
-            }),
-        }).then(response => {
-            if (!response.ok) {
-                alert('更新に失敗しました。もう一度試してください。');
-            }
-        }).catch(() => {
-            alert('サーバーとの通信に失敗しました。');
-        });
+document.getElementById('payment-form').addEventListener('submit', function (event) {
+    event.preventDefault(); // フォームのデフォルト送信を防ぐ
+
+    const formData = new FormData(this); // フォームデータを取得
+    const selectedStatuses = Array.from(formData.getAll('statuses')); // 選択されたIDを取得
+
+    // サーバーにデータ送信
+    fetch('/accounting/update_status_batch/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'X-CSRFToken': getCSRFToken(),
+        },
+        body: new URLSearchParams({
+            statuses: [1, 2, 3], 
+        }),
+    })
+    
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('保存が成功しました！');
+        } else {
+            alert('保存に失敗しました。');
+        }
+    })
+    .catch(error => {
+        console.error('通信エラー:', error);
+        alert('サーバーとの通信に失敗しました。');
     });
+});
+
+
+console.log('送信データ:', {
+    status_id: statusId,
+    is_paid: isPaid
 });
