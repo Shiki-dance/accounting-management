@@ -14,6 +14,9 @@ def register_data():
     {'name': '打ち上げ代', 'amount': 1000},
     {'name': '夏旅行代', 'amount': 5000},
     {'name': 'ダンパ費', 'amount': 2000},
+    {'name': '月会費', 'amount': 2000},
+    {'name': '公演費', 'amount': 2000},
+    {'name': 'ベースメント費', 'amount': 2000},
 ]
     for item in payment_items:
         PaymentItem.objects.get_or_create(name=item['name'], defaults={'amount': item['amount']})
