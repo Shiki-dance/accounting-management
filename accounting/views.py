@@ -275,7 +275,12 @@ def member_list(request):
 
     if selected_item:
         # 選択された支払い項目を取得
-        payment_item = get_object_or_404(PaymentItem, id=selected_item)
+        try:
+            payment_item = PaymentItem.objects.get(id=selected_item)
+        except PaymentItem.DoesNotExist:
+            payment_item = None
+            print("Payment item not found.")
+
         payment_statuses = PaymentStatus.objects.filter(payment_item=payment_item)
 
         # 支払いステータスを分類

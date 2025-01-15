@@ -21,6 +21,8 @@
     
     
     {% if categorized_statuses %}
+    <pre>{{ categorized_statuses|safe }}</pre>
+
     <form method="post" action="{% url 'update_status_batch' %}" class="styled-form">
         {% csrf_token %}
         <input type="hidden" name="payment_item_id" value="{{ selected_item }}">
