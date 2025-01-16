@@ -75,6 +75,21 @@ def create_expenses(request):
 
     return render(request, 'accounting/create_expenses.html', {'form': form})
 
+
+def department_expenses(request):
+    departments = Expense.objects.values('department').distinct()
+    department_data = {}
+    for dept in departments:
+        department = dept['department']
+        expenses = Expense.objects.filter(department=department)
+        total = expenses.aggregate(Sum('amount'))['amount__sum'] or 0
+        #金額の合計を計算
+        department_data[department] = {
+            'total': total,#合計を表示
+            'details': expenses,#支出の内訳を表示
+        }
+    return render(request, 'accounting/department_expenses.html', {'department_data': department_data})
+
 from django.shortcuts import render
 from .models import Expense  # Expenseモデルをインポート
 
