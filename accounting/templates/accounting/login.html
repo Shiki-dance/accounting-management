@@ -1,11 +1,92 @@
-<form method="POST">
-    {% csrf_token %}
-    <label for="username">Username</label>
-    <input type="text" id="username" name="username">
-    <label for="password">Password</label>
-    <input type="password" id="password" name="password">
-    <button type="submit">Login</button>
-    {% if error %}
-        <p>{{ error }}</p>
-    {% endif %}
-</form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        /* 全体の背景画像設定 */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: url('DLC_imageback.jpg') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: white;
+        }
+
+        /* ログインコンテナ（背景上に配置） */
+        .login-container {
+            text-align: center;
+            color: #B22222; /* 赤文字 */
+        }
+
+        /* タイトルのスタイル */
+        .login-container h1 {
+            font-size: 32px;
+            margin-bottom: 30px;
+        }
+
+        /* 入力欄全体 */
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        /* ラベル */
+        .input-group label {
+            display: block;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            text-align: left;
+            color: white; /* 背景上で目立つように白色 */
+        }
+
+        /* 入力フィールド */
+        .input-group input {
+            width: 280px;
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.9); /* 半透明の背景 */
+        }
+
+        /* ログインボタン */
+        .login-button {
+            display: inline-block;
+            padding: 12px 20px;
+            font-size: 18px;
+            color: #fff;
+            background: #007BFF; /* 青系ボタン */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            transition: background 0.3s ease;
+        }
+
+        /* ボタンのホバー効果 */
+        .login-button:hover {
+            background: #0056b3; /* 濃い青色 */
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h1>Welcome to DLC</h1>
+        <div class="input-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" placeholder="Enter your username">
+        </div>
+        <div class="input-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Enter your password">
+        </div>
+        <button class="login-button" type="submit">Login</button>
+    </div>
+</body>
+</html>
