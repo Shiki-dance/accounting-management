@@ -16,19 +16,28 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
+            overflow: auto; /* スクロール可能に */
             color: white;
         }
 
         /* ログインコンテナ（背景上に配置） */
         .login-container {
             text-align: center;
+            padding: 20px;
             color: #B22222; /* 赤文字 */
+            margin: 50px 0; /* スクロール用に余白を追加 */
         }
 
         /* タイトルのスタイル */
         .login-container h1 {
             font-size: 32px;
             margin-bottom: 30px;
+            animation: typewriter 4s steps(15) infinite; /* アニメーションを追加 */
+        }
+        @media (min-width: 768px) {
+            .login-container h1 {
+                font-size: 48px;
+            }
         }
 
         /* 入力欄全体 */
@@ -73,6 +82,14 @@
         /* ボタンのホバー効果 */
         .login-button:hover {
             background: #252627; 
+        }
+
+        /* タイプライター風のアニメーション */
+        @keyframes typewriter {
+            0%, 25% { content: "W"; }
+            25%, 50% { content: "Welcome"; }
+            50%, 75% { content: "Welcome to"; }
+            75%, 100% { content: "Welcome to DLC"; }
         }
     </style>
 </head>
