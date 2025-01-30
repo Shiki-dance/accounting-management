@@ -30,9 +30,8 @@
 
         /* タイトルのスタイル */
         .login-container h1 {
-            font-size: 32px;
+            font-size: 34px;
             margin-bottom: 30px;
-            animation: typewriter 4s steps(15) infinite; /* アニメーションを追加 */
         }
         @media (min-width: 768px) {
             .login-container h1 {
@@ -83,19 +82,12 @@
         .login-button:hover {
             background: #252627; 
         }
-
-        /* タイプライター風のアニメーション */
-        @keyframes typewriter {
-            0%, 25% { content: "W"; }
-            25%, 50% { content: "Welcome"; }
-            50%, 75% { content: "Welcome to"; }
-            75%, 100% { content: "Welcome to DLC"; }
-        }
+        
     </style>
 </head>
 <body>
     <div class="login-container">
-        <h1>Welcome to DLC</h1>
+        <h1 id="welcome-text"></h1>  <!-- JavaScriptで文字が表示される部分 -->
         <div class="input-group">
             <label for="username">Username</label>
             <input type="text" id="username" name="username" placeholder="Enter your username">
@@ -106,5 +98,8 @@
         </div>
         <button class="login-button" type="submit">Login</button>
     </div>
+
+    <script src="{% static 'accounting/js/script.js' %}"></script>  
+
 </body>
 </html>
