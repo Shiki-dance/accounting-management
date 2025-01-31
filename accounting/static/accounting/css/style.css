@@ -1,15 +1,24 @@
-/*全体設定 */
+/*全体設定*/
+
 body {
-    font-family: 'Roboto', Arial, sans-serif;
-    /*背景にグラデーションを採用*/
-    background: linear-gradient(135deg, #649fda, #ff7f50);
-    /*文字色を白に指定*/
-    color: #fff;
     margin: 0;
-    padding: 0;
-    font-size: 16px; /* 基本フォントサイズを調整 */
+    font-family: Arial, sans-serif;
+    background: url("{% static 'accounting/images/DLC_imageback.jpg' %}") no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 75vh;
+    overflow: auto; /* スクロール可能に */
+    color: white;
 }
 
+@media (min-width: 1024px) {
+   body {
+       background-size: contain;  /* PCでは拡大しすぎないようにする */
+       background-position: top center;
+    }
+}
 
 
 /* ヘッダー */
@@ -326,7 +335,7 @@ footer {
 }
 
 .sort-form .btn-sort:hover {
-    background-color: #357abd;
+    background-color: #e28b58f1;
 }
 
 /* 代、係りごとのセクション */
