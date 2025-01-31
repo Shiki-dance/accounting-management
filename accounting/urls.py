@@ -1,6 +1,7 @@
 from django.urls import path
 from . import views
-from django.shortcuts import render
+from .views import index_view
+
 
 
 # accounting/views.py
@@ -10,6 +11,7 @@ from django.http import HttpResponse
 urlpatterns = [
     path('login/', views.login_view, name='login'), # ログイン登録url
     path('', views.index, name='index'),  # ルートURLに対するビュー
+    path("", index_view, name="index"), 
     path('create-expenses/', views.create_expenses, name='create_expenses'), # 係りごとの支出入力フォーム
     path('expense-list/', views.expense_list, name='expense_list'),  # expense_listのURLパターン
     path('department-expenses/', views.department_expenses, name='department_expenses'), #係りごとの支出フォーム

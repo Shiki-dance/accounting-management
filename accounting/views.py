@@ -22,27 +22,23 @@ logger = logging.getLogger(__name__)
 
 # ログイン設定
 from django.contrib.auth import authenticate, login
-
+from django.contrib.auth.decorators import login_required
 
 def login_view(request):
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
-        user = authenticate(request, username=username, password=password)
+        user = authenticate(request, username=username, password=password) #ここでは単にデータベースと比較し認証をおこなっているだけ
         if user is not None:
-            login(request, user)
-            return redirect('home')  # ホームページにリダイレクト
+            login(request, user)    # ここで実際にログイン状態にする
+            return redirect('index')  # ホームページにリダイレクト
         else:
             return render(request, 'login.html', {'error': 'Invalid credentials'})
     return render(request, 'accounting/login.html')
 
-from django.contrib.auth.decorators import login_required
-
 @login_required
-def home(request):
-    # ホームページの処理
-    return render(request, 'home.html')
-
+def index_view(request):
+    return render(request, "accounting/index.html")
 
 # 1. 係りごとの支出合計と内訳
 def department_expenses(request):
