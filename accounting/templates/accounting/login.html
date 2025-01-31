@@ -20,6 +20,13 @@
             color: white;
         }
 
+        @media (min-width: 1024px) {
+           body {
+               background-size: contain;  /* PCでは拡大しすぎないようにする */
+               background-position: top center;
+            }
+        }
+
         /* ログインコンテナ（背景上に配置） */
         .login-container {
             text-align: center;
