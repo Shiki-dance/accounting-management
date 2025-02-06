@@ -76,7 +76,7 @@ TEMPLATES = [
     },
 ]
 
-LOGIN_URL = "/login/"
+LOGIN_URL = "accounting/login/"
 
 
 
