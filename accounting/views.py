@@ -150,7 +150,7 @@ def monthly_personal_expenses(request):
 
     return render(request, 'accounting/monthly_personal_expenses.html', {'personal_data': personal_data})
 
-@login_required
+
 def index(request):
     
     return render(request, 'accounting/index.html') 
