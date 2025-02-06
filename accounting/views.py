@@ -36,9 +36,7 @@ def login_view(request):
             return render(request, 'login.html', {'error': 'Invalid credentials'})
     return render(request, 'accounting/login.html')
 
-@login_required
-def index_view(request):
-    return render(request, "accounting/index.html")
+
 
 # 1. 係りごとの支出合計と内訳
 def department_expenses(request):
@@ -152,6 +150,7 @@ def monthly_personal_expenses(request):
 
     return render(request, 'accounting/monthly_personal_expenses.html', {'personal_data': personal_data})
 
+@login_required
 def index(request):
     
     return render(request, 'accounting/index.html') 
