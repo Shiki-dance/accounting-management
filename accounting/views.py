@@ -33,7 +33,7 @@ def login_view(request):
             login(request, user)    # ここで実際にログイン状態にする
             return redirect('index')  # ホームページにリダイレクト
         else:
-            return render(request, 'login.html', {'error': 'Invalid credentials'})
+            return render(request, 'accounting/login.html', {'error': 'Invalid credentials'})
     return render(request, 'accounting/login.html')
 
 def index_view(request):

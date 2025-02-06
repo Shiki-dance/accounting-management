@@ -28,5 +28,5 @@ def index(request):
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounting/', include('accounting.urls')),  # accounting.urls をインクルード
-    path('', views.index, name='home'),  # 追加: ルートURLを処理するビュー
+    path('', views.index_view, name='index'),  # 追加: ルートURLを処理するビュー
 ]
