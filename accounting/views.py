@@ -36,7 +36,9 @@ def login_view(request):
             return render(request, 'login.html', {'error': 'Invalid credentials'})
     return render(request, 'accounting/login.html')
 
-
+def index_view(request):
+    
+    return render(request, 'accounting/index.html') 
 
 def index(request):
     
