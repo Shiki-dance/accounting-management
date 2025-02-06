@@ -40,10 +40,6 @@ def index_view(request):
     
     return render(request, 'accounting/index.html') 
 
-def index(request):
-    
-    return render(request, 'accounting/index.html') 
-
 # 1. 係りごとの支出合計と内訳
 def department_expenses(request):
     departments = Expense.objects.values('department').distinct()
